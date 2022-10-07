@@ -7,7 +7,7 @@ public class Note {
     private String name;
     private String fileType;
     private File fileLocation;
-    private int id;
+    //private int id;
     private Status status;
 
     //REQUIRES: a file with a valid path
@@ -33,9 +33,9 @@ public class Note {
         return null;
     }
 
-    public int getId() {
+    /*public int getId() {
         return 0;
-    }
+    }*/
 
     public Status getStatus() {
         return Status.INCOMPLETE;

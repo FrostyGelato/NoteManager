@@ -7,7 +7,7 @@ import java.util.LinkedHashSet;
 public class Topic {
     private String name;
     private LinkedHashSet<Note> listOfNotes;
-    private int id;
+    //private int id;
 
     //REQUIRES: name is non-null string
     //EFFECTS: constructs a topic with given name, random id, and empty list of notes
@@ -37,7 +37,7 @@ public class Topic {
         return new LinkedHashSet<Note>();
     }
 
-    public int getId() {
+    /*public int getId() {
         return 0;
-    }
+    }*/
 }
