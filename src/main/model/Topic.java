@@ -10,22 +10,20 @@ public class Topic {
     //private int id;
 
     //REQUIRES: name is non-null string
-    //EFFECTS: constructs a topic with given name, random id, and empty list of notes
+    //EFFECTS: constructs a topic with given name, and empty list of notes
     public Topic(String name) {
 
     }
 
-    //REQUIRES: a file with a valid path
     //MODIFIES: this
-    //EFFECTS: create a note with given file and add it to list of notes
-    public void addNote(File file) {
+    //EFFECTS: adds given note to list of notes unless it's already there, in which case do nothing
+    public void addNote(Note note) {
 
     }
 
-    //REQUIRES: file corresponding to an existing note
     //MODIFIES: this
-    //EFFECTS: remove the note linked to given file from list of notes
-    public void removeNote(File file) {
+    //EFFECTS: if the given note is in list of notes, removes it; otherwise, do nothing
+    public void removeNote(Note note) {
 
     }
 

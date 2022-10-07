@@ -13,14 +13,12 @@ public class Subject {
 
     }
 
-    //REQUIRES: topic with unique name
     //MODIFIES: this
     //EFFECTS: adds the given topic to list of topics unless it's already there, in which case do nothing
     public void addTopic(Topic topic) {
 
     }
 
-    //REQUIRES: a topic present in the list of topics
     //MODIFIES: this
     //EFFECTS: if the given topic is in list of topics, removes it; otherwise, do nothing
     public void removeTopic(Topic topic) {

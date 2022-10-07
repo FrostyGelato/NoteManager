@@ -1,18 +1,18 @@
 package model;
 
-import java.io.File;
+import java.nio.file.Path;
 
 // Represents a note that is linked to a file in the filesystem
 public class Note {
     private String name;
     private String fileType;
-    private File fileLocation;
+    private Path fileLocation;
     //private int id;
     private Status status;
 
     //REQUIRES: a file with a valid path
     //EFFECTS: constructs a note with a given name of file, type of file, location of file, and incomplete status
-    public Note(File file) {
+    public Note(Path file) {
 
     }
 
@@ -29,7 +29,7 @@ public class Note {
         return "";
     }
 
-    public File getFileLocation() {
+    public Path getFileLocation() {
         return null;
     }
 
