@@ -22,10 +22,10 @@ public class Topic {
 
     }
 
-    //REQUIRES: id corresponding to an existing note
+    //REQUIRES: file corresponding to an existing note
     //MODIFIES: this
-    //EFFECTS: remove the note with given id from list of notes
-    public void deleteNote(int id) {
+    //EFFECTS: remove the note linked to given file from list of notes
+    public void removeNote(File file) {
 
     }
 

@@ -1,6 +1,5 @@
 package model;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 
 // Represents a subject that holds a list of related topics
@@ -8,23 +7,23 @@ public class Subject {
     private String name;
     private LinkedHashSet<Topic> listOfTopics;
 
-    //REQUIRES: name is non-null string
+    //REQUIRES: name is non-empty string
     //EFFECTS: constructs a subject with given name and empty list of topics
     public Subject(String name) {
 
     }
 
-    //REQUIRES: name is non-null string
+    //REQUIRES: topic with unique name
     //MODIFIES: this
-    //EFFECTS: create a topic with given name and no notes and add it to list of topics
-    public void addTopic(String name) {
+    //EFFECTS: adds the given topic to list of topics unless it's already there, in which case do nothing
+    public void addTopic(Topic topic) {
 
     }
 
-    //REQUIRES: id that corresponds to an existing topic
+    //REQUIRES: a topic present in the list of topics
     //MODIFIES: this
-    //EFFECTS: removes a topic with given id from list of topics
-    public void deleteTopic(int id) {
+    //EFFECTS: if the given topic is in list of topics, removes it; otherwise, do nothing
+    public void removeTopic(Topic topic) {
 
     }
 
