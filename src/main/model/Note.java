@@ -10,6 +10,12 @@ public class Note {
     private int id;
     private Status status;
 
+    //REQUIRES: a file with a valid path
+    //EFFECTS: constructs a note with a given name of file, type of file, location of file, and incomplete status
+    public Note(File file) {
+
+    }
+
     //EFFECTS: open the file linked to this note
     public void openFile() {
 
