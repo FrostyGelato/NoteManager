@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.*;
+import java.io.IOException;
 import java.nio.file.Path;
 
 // Represents a note that is linked to a file in the filesystem
@@ -13,12 +15,15 @@ public class Note {
     //REQUIRES: a file with a valid path
     //EFFECTS: constructs a note with a given name of file, location of file, and incomplete status
     public Note(Path file) {
-
+        name = String.valueOf(file.getFileName());
+        fileLocation = file;
+        status = Status.INCOMPLETE;
     }
 
     //EFFECTS: open the file linked to this note
-    public void openFile() {
-
+    public void openFile() throws IOException {
+        Desktop desktop = Desktop.getDesktop();
+        desktop.open(fileLocation.toFile());
     }
 
     //MODIFIES: this
@@ -28,15 +33,15 @@ public class Note {
     }
 
     public String getName() {
-        return "";
+        return name;
     }
-    
+
     public Path getFileLocation() {
-        return null;
+        return fileLocation;
     }
 
     public Status getStatus() {
-        return Status.INCOMPLETE;
+        return status;
     }
 
     /*public int getId() {

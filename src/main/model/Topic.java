@@ -12,27 +12,28 @@ public class Topic {
     //REQUIRES: name is non-null string
     //EFFECTS: constructs a topic with given name, and empty list of notes
     public Topic(String name) {
-
+        this.name = name;
+        listOfNotes = new LinkedHashSet<>();
     }
 
     //MODIFIES: this
     //EFFECTS: adds given note to list of notes unless it's already there, in which case do nothing
     public void addNote(Note note) {
-
+        listOfNotes.add(note);
     }
 
     //MODIFIES: this
     //EFFECTS: if the given note is in list of notes, removes it; otherwise, do nothing
     public void removeNote(Note note) {
-
+        listOfNotes.remove(note);
     }
 
     public String getName() {
-        return "";
+        return name;
     }
 
     public LinkedHashSet<Note> getListOfNotes() {
-        return new LinkedHashSet<Note>();
+        return listOfNotes;
     }
 
     /*public int getId() {

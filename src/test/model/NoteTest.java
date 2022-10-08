@@ -30,7 +30,7 @@ class NoteTest {
 
     @Test
     void testConstructor() {
-        assertEquals("Vocabulary", testNote.getName());
+        assertEquals("Vocabulary.txt", testNote.getName());
         assertEquals(testFilePath, testNote.getFileLocation());
         assertEquals(Status.INCOMPLETE, testNote.getStatus());
     }

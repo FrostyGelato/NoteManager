@@ -89,6 +89,6 @@ public class TopicTest {
 
         Note testNote2 = new Note(testFile1Path);
         testTopic.removeNote(testNote2);
-        assertFalse(testTopic.getListOfNotes().contains(testNote1));
+        assertTrue(testTopic.getListOfNotes().contains(testNote1));
     }
 }
