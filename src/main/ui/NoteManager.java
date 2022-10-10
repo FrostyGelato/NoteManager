@@ -67,6 +67,7 @@ public class NoteManager {
         System.out.println("\nEnter the name of the subject you wish to open\n"
                 + "Or select from the following options:");
         System.out.println("n -> create new subject");
+        System.out.println("r -> remove a subject");
         System.out.println("q -> quit");
     }
 
@@ -75,6 +76,8 @@ public class NoteManager {
     private void processSubjectMenuInput(String userResponse) {
         if (userResponse.equals("n")) {
             createNewSubject();
+        } else if (userResponse.equals("r")) {
+            removeSubject();
         } else {
             for (Subject s: listOfSubjects) {
                 if (userResponse.equals(s.getName())) {
@@ -96,6 +99,21 @@ public class NoteManager {
                 }
             }
         }
+    }
+
+    //MODIFIES: this
+    private void removeSubject() {
+        System.out.println("Enter name of subject to remove and click Enter:");
+        String subjectName = input.next();
+        Subject subjectToBeRemoved = null;
+
+        for (Subject s: listOfSubjects) {
+            if (subjectName.equals(s.getName())) {
+                subjectToBeRemoved = s;
+            }
+        }
+        
+        listOfSubjects.remove(subjectToBeRemoved);
     }
 
     //MODIFIES: this
@@ -137,6 +155,7 @@ public class NoteManager {
         System.out.println("\nEnter the name of the topic you wish to open\n"
                 + "Or select from the following options:");
         System.out.println("n -> create new topic");
+        System.out.println("r -> remove a topic");
         System.out.println("s -> return to subject menu");
     }
 
@@ -144,6 +163,8 @@ public class NoteManager {
 
         if (userResponse.equals("n")) {
             createNewTopic(selectedSubject);
+        } else if (userResponse.equals("r")) {
+            removeTopic(selectedSubject);
         } else {
             for (Topic t: selectedSubject.getListOfTopics()) {
                 if (userResponse.equals(t.getName())) {
@@ -165,6 +186,20 @@ public class NoteManager {
                 }
             }
         }
+    }
+
+    private void removeTopic(Subject selectedSubject) {
+        System.out.println("Enter name of topic to remove and click Enter:");
+        String topicName = input.next();
+        Topic topicToBeRemoved = null;
+
+        for (Topic t: selectedSubject.getListOfTopics()) {
+            if (topicName.equals(t.getName())) {
+                topicToBeRemoved = t;
+            }
+        }
+
+        selectedSubject.removeTopic(topicToBeRemoved);
     }
 
     private void processNoteMenuInput(Topic selectedTopic, String userResponse) {
@@ -196,7 +231,7 @@ public class NoteManager {
             System.out.println("You have no notes.");
         } else {
             for (Note n: selectedTopic.getListOfNotes()) {
-                System.out.println(n.getName());
+                System.out.println(n.getName() + " - " + n.getStatus() + " - " + n.getFileLocation());
             }
         }
 
