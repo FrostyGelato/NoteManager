@@ -1,9 +1,13 @@
 package ui;
 
 import model.HasName;
+import model.Note;
 import model.Subject;
 import model.Topic;
 
+import javax.swing.*;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
 
@@ -18,6 +22,7 @@ public class NoteManager {
 
     //MODIFIES: this
     //EFFECTS: displays console UI and receives user input
+    // from TellerApp
     private void runManager() {
 
         boolean keepGoing = true;
@@ -65,6 +70,8 @@ public class NoteManager {
         System.out.println("q -> quit");
     }
 
+    //MODIFIES: this
+    //EFFECTS: allows user to create new subject and displays the topic menu with a subject
     private void processSubjectMenuInput(String userResponse) {
         if (userResponse.equals("n")) {
             createNewSubject();
@@ -112,7 +119,7 @@ public class NoteManager {
         return hasDuplicateName(subjectName, listOfSubjects);
     }
 
-    //EFFECTS: displays a list of topics in selected subject and other options
+    //EFFECTS: displays a list of topics in selected subject and other menu options
     private void displayTopicMenu(Subject selectedSubject) {
 
         System.out.println("Topic Menu\n");
@@ -137,7 +144,66 @@ public class NoteManager {
 
         if (userResponse.equals("n")) {
             createNewTopic(selectedSubject);
+        } else {
+            for (Topic t: selectedSubject.getListOfTopics()) {
+                if (userResponse.equals(t.getName())) {
+
+                    boolean keepGoing = true;
+                    String userResponseInNoteMenu;
+
+                    while (keepGoing) {
+                        displayNoteMenu(t);
+                        userResponseInNoteMenu = input.next().toLowerCase();
+
+                        if (userResponseInNoteMenu.equals("s")) {
+                            keepGoing = false;
+                        } else {
+                            processNoteMenuInput(t, userResponseInNoteMenu);
+                        }
+                    }
+                    break;
+                }
+            }
         }
+    }
+
+    private void processNoteMenuInput(Topic selectedTopic, String userResponse) {
+        if (userResponse.equals("n")) {
+            selectedTopic.addNote(new Note(Path.of(input.next())));
+        } else {
+            for (Note n: selectedTopic.getListOfNotes()) {
+                if (userResponse.equals(n.getName())) {
+                    try {
+                        System.out.println("Opening file...");
+                        n.openFile();
+                    } catch (IOException e) {
+                        System.out.println("Error: Unable to open file");
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    //EFFECTS: displays a list of note in selected topic and other menu options
+    private void displayNoteMenu(Topic selectedTopic) {
+
+        System.out.println("Note Menu\n");
+
+        System.out.println("Note List for " + selectedTopic.getName() + ":");
+
+        if (selectedTopic.getListOfNotes().isEmpty()) {
+            System.out.println("You have no notes.");
+        } else {
+            for (Note n: selectedTopic.getListOfNotes()) {
+                System.out.println(n.getName());
+            }
+        }
+
+        System.out.println("\nEnter the name of the note you wish to open\n"
+                + "Or select from the following options:");
+        System.out.println("n -> import new note");
+        System.out.println("s -> return to topic menu");
     }
 
     private void createNewTopic(Subject selectedSubject) {
