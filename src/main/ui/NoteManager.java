@@ -191,19 +191,13 @@ public class NoteManager {
     private void removeTopic(Subject selectedSubject) {
         System.out.println("Enter name of topic to remove and click Enter:");
         String topicName = input.next();
-        Topic topicToBeRemoved = null;
 
-        for (Topic t: selectedSubject.getListOfTopics()) {
-            if (topicName.equals(t.getName())) {
-                topicToBeRemoved = t;
-            }
-        }
-
-        selectedSubject.removeTopic(topicToBeRemoved);
+        selectedSubject.removeTopic(topicName);
     }
 
     private void processNoteMenuInput(Topic selectedTopic, String userResponse) {
         if (userResponse.equals("n")) {
+            System.out.println("Enter the full path of the note:");
             selectedTopic.addNote(new Note(Path.of(input.next())));
         } else {
             for (Note n: selectedTopic.getListOfNotes()) {

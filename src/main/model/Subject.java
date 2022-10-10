@@ -26,6 +26,12 @@ public class Subject implements HasName {
         listOfTopics.remove(topic);
     }
 
+    //MODIFIES: this
+    //EFFECTS: if there is a topic with given name in list of topics, removes it; otherwise, do nothing
+    public void removeTopic(String topicName) {
+        listOfTopics.removeIf(topic -> topic.getName().equals(topicName));
+    }
+
     public String getName() {
         return name;
     }

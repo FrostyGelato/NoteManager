@@ -70,4 +70,14 @@ public class SubjectTest {
         assertTrue(testSubject.getListOfTopics().contains(testTopic1));
         assertEquals(1, testSubject.getListOfTopics().size());
     }
+
+    @Test
+    void testRemoveTopicByName() {
+        Topic testTopic = new Topic("Logarithm");
+        testSubject.addTopic(testTopic);
+        assertTrue(testSubject.getListOfTopics().contains(testTopic));
+
+        testSubject.removeTopic("Logarithm");
+        assertFalse(testSubject.getListOfTopics().contains(testTopic));
+    }
 }
