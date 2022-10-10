@@ -1,5 +1,6 @@
 package ui;
 
+import model.HasName;
 import model.Subject;
 import model.Topic;
 
@@ -72,30 +73,12 @@ public class NoteManager {
                 if (userResponse.equals(s.getName())) {
 
                     displayTopicMenu(s);
+                    processTopicMenuInput(s);
 
                     break;
                 }
             }
         }
-    }
-
-    //EFFECTS: displays a list of topics in selected subject
-    private void displayTopicMenu(Subject selectedSubject) {
-
-        System.out.println("Topic List:");
-
-        if (selectedSubject.getListOfTopics().isEmpty()) {
-            System.out.println("You have no topics.");
-        } else {
-            for (Topic t: selectedSubject.getListOfTopics()) {
-                System.out.println(t.getName());
-            }
-        }
-
-        System.out.println("Enter the name of the topic you wish to open\n"
-                + "Or select from the following options:");
-        System.out.println("n -> create new topic");
-        System.out.println("s -> return to subject menu");
     }
 
     //MODIFIES: this
@@ -125,4 +108,64 @@ public class NoteManager {
 
         return isDuplicate;
     }
+
+    //EFFECTS: displays a list of topics in selected subject and other options
+    private void displayTopicMenu(Subject selectedSubject) {
+
+        System.out.println("Topic List:");
+
+        if (selectedSubject.getListOfTopics().isEmpty()) {
+            System.out.println("You have no topics.");
+        } else {
+            for (Topic t: selectedSubject.getListOfTopics()) {
+                System.out.println(t.getName());
+            }
+        }
+
+        System.out.println("Enter the name of the topic you wish to open\n"
+                + "Or select from the following options:");
+        System.out.println("n -> create new topic");
+        System.out.println("s -> return to subject menu");
+    }
+
+    private void processTopicMenuInput(Subject selectedSubject) {
+
+        String userResponse = input.next();
+
+        if (userResponse.equals("n")) {
+            createNewTopic();
+        }
+    }
+
+    private void createNewTopic() {
+
+    }
+
+    //REQUIRES: topicName is non-empty
+    //EFFECTS: return true is list already contains a topic with same name; otherwise return false
+    public boolean isDuplicateTopic(String topicName, LinkedHashSet<Topic> listOfTopics) {
+        boolean isDuplicate = false;
+
+        for (Topic t: listOfTopics) {
+            if (topicName.equals(t.getName())) {
+                isDuplicate = true;
+            }
+        }
+
+        return isDuplicate;
+    }
+
+
+    public boolean hasDuplicateName(String name, LinkedHashSet<? extends HasName> list) {
+        boolean isDuplicate = false;
+
+        for (HasName e: list) {
+            if (name.equals(e.getName())) {
+                isDuplicate = true;
+            }
+        }
+
+        return isDuplicate;
+    }
+
 }

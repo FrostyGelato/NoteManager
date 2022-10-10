@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.LinkedHashSet;
 
 // Represents a topic that can hold a list of notes related to that topic
-public class Topic {
+public class Topic implements HasName {
     private String name;
     private LinkedHashSet<Note> listOfNotes;
     //private int id;

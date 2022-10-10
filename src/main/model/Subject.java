@@ -3,7 +3,7 @@ package model;
 import java.util.LinkedHashSet;
 
 // Represents a subject that holds a list of related topics
-public class Subject {
+public class Subject implements HasName {
     private String name;
     private LinkedHashSet<Topic> listOfTopics;
 
