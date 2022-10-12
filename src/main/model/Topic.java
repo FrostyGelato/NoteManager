@@ -1,13 +1,11 @@
 package model;
 
-import java.io.File;
 import java.util.LinkedHashSet;
 
 // Represents a topic that can hold a list of notes related to that topic
 public class Topic implements HasName {
     private String name;
     private LinkedHashSet<Note> listOfNotes;
-    //private int id;
 
     //REQUIRES: name is non-null string
     //EFFECTS: constructs a topic with given name, and empty list of notes
@@ -28,6 +26,13 @@ public class Topic implements HasName {
         listOfNotes.remove(note);
     }
 
+    //REQUIRES: filePath is a valid path to a file
+    //MODIFIES: this
+    //EFFECTS: if there is a note with the given path in list of notes, removes it; otherwise, do nothing
+    public void removeNote(String filePath) {
+        listOfNotes.removeIf(note -> note.getFileLocation().toString().equals(filePath));
+    }
+
     public String getName() {
         return name;
     }
@@ -35,8 +40,4 @@ public class Topic implements HasName {
     public LinkedHashSet<Note> getListOfNotes() {
         return listOfNotes;
     }
-
-    /*public int getId() {
-        return 0;
-    }*/
 }

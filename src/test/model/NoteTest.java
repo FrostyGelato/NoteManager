@@ -37,13 +37,13 @@ class NoteTest {
 
     @Test
     void testSetStatusChange() {
-        testNote.setStatus(Status.NEED_REVISION);
+        testNote.setStatus(2);
         assertEquals(Status.NEED_REVISION, testNote.getStatus());
     }
 
     @Test
     void testSetStatusNoChange() {
-        testNote.setStatus(Status.INCOMPLETE);
+        testNote.setStatus(1);
         assertEquals(Status.INCOMPLETE, testNote.getStatus());
     }
 }

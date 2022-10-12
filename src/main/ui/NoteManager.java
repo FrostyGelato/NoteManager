@@ -5,7 +5,6 @@ import model.Note;
 import model.Subject;
 import model.Topic;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.LinkedHashSet;
@@ -199,6 +198,8 @@ public class NoteManager {
         if (userResponse.equals("n")) {
             System.out.println("Enter the full path of the note:");
             selectedTopic.addNote(new Note(Path.of(input.next())));
+        } else if (userResponse.equals("r")) {
+            removeNote(selectedTopic);
         } else {
             for (Note n: selectedTopic.getListOfNotes()) {
                 if (userResponse.equals(n.getName())) {
@@ -212,6 +213,13 @@ public class NoteManager {
                 }
             }
         }
+    }
+
+    private void removeNote(Topic selectedTopic) {
+        System.out.println("Enter path of note to remove and click Enter:");
+        String filePath = input.next();
+
+        selectedTopic.removeNote(filePath);
     }
 
     //EFFECTS: displays a list of note in selected topic and other menu options
@@ -232,6 +240,7 @@ public class NoteManager {
         System.out.println("\nEnter the name of the note you wish to open\n"
                 + "Or select from the following options:");
         System.out.println("n -> import new note");
+        System.out.println("r -> remove a note");
         System.out.println("s -> return to topic menu");
     }
 

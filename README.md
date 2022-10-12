@@ -17,4 +17,3 @@ My project will be a notes management application. **It will keep track of notes
 - As a user, I want to be able to mark a note as complete, incomplete, and need revision
 - As a user, I want to be able to open the note file from inside the application
 - As a user, I want to be able to remove a note file from a topic
-- As a user, I want to be able to add a note file under multiple topics at once.
