@@ -16,7 +16,7 @@ public class ListOfSubjects {
     //EFFECTS: creates a subject with given name and adds it to list
     // unless there is already a subject with same name, in which case, do nothing
     public void addSubject(String name) {
-
+        listOfSubjects.add(new Subject(name));
     }
 
     //REQUIRES:

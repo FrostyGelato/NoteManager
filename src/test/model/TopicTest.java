@@ -13,8 +13,6 @@ public class TopicTest {
     private Topic testTopic;
     private Path testFile1Path;
     private Path testFile2Path;
-    //private File testFile1;
-    //private File testFile2;
 
     @TempDir
     Path tempDir;
@@ -30,9 +28,6 @@ public class TopicTest {
         catch( InvalidPathException ipe ) {
             System.err.println("could not create test files");
         }
-
-        //testFile1 = testFile1Path.toFile();
-        //testFile2 = testFile2Path.toFile();
     }
 
     @Test
@@ -90,5 +85,15 @@ public class TopicTest {
         Note testNote2 = new Note(testFile1Path);
         testTopic.removeNote(testNote2);
         assertTrue(testTopic.getListOfNotes().contains(testNote1));
+    }
+
+    @Test
+    void testRemoveNoteString() {
+        Note testNote1 = new Note(testFile1Path);
+        testTopic.addNote(testNote1);
+        assertTrue(testTopic.getListOfNotes().contains(testNote1));
+
+        testTopic.removeNote(testFile1Path.toString());
+        assertFalse(testTopic.getListOfNotes().contains(testNote1));
     }
 }
