@@ -3,7 +3,7 @@ package model;
 import java.util.LinkedHashSet;
 
 // Represents a subject that holds a list of related topics
-public class Subject implements HasName {
+public class Subject extends HasNameAndList {
     private String name;
     private LinkedHashSet<Topic> listOfTopics;
 
@@ -30,6 +30,12 @@ public class Subject implements HasName {
     //EFFECTS: if there is a topic with given name in list of topics, removes it; otherwise, do nothing
     public void removeTopic(String topicName) {
         listOfTopics.removeIf(topic -> topic.getName().equals(topicName));
+    }
+
+    //REQUIRES: name is non-empty
+    //EFFECTS: return true is list already contains a topic with same name; otherwise return false
+    public boolean containsDuplicateTopic(String name) {
+        return isDuplicateName(name, listOfTopics);
     }
 
     public String getName() {

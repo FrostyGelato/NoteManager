@@ -3,7 +3,7 @@ package model;
 import java.util.LinkedHashSet;
 
 // Represents a topic that can hold a list of notes related to that topic
-public class Topic implements HasName {
+public class Topic extends HasNameAndList {
     private String name;
     private LinkedHashSet<Note> listOfNotes;
 

@@ -2,7 +2,7 @@ package model;
 
 import java.util.LinkedHashSet;
 
-public class ListOfSubjects {
+public class ListOfSubjects extends ContainsList {
 
     private LinkedHashSet<Subject> listOfSubjects;
 
@@ -22,6 +22,12 @@ public class ListOfSubjects {
     //REQUIRES:
     public void removeSubject(String name) {
         listOfSubjects.removeIf(subject -> subject.getName().equals(name));
+    }
+
+    //REQUIRES: subjectName is non-empty
+    //EFFECTS: return true if list already contains a subject with same name; otherwise return false
+    public boolean containsDuplicateSubject(String name) {
+        return isDuplicateName(name, listOfSubjects);
     }
 
     public LinkedHashSet<Subject> getListOfSubjects() {

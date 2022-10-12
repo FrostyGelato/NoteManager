@@ -98,20 +98,12 @@ public class NoteManager {
     }
 
     //MODIFIES: this
-    private void removeSubject() {
-        System.out.println("Enter name of subject to remove and click Enter:");
-        String subjectName = input.next();
-
-        listOfSubjects.removeSubject(subjectName);
-    }
-
-    //MODIFIES: this
     //EFFECTS: asks user for subject name and creates subject with given name in list
     private void createNewSubject() {
         System.out.println("Enter name for subject and click Enter:");
         String subjectName = input.next();
 
-        if (isDuplicateSubject(subjectName)) {
+        if (listOfSubjects.containsDuplicateSubject(subjectName)) {
             System.out.println("Error: You cannot have subjects with the same name.\n"
                     + "Please try again.");
         } else {
@@ -119,11 +111,12 @@ public class NoteManager {
         }
     }
 
-    //REQUIRES: subjectName is non-empty
-    //EFFECTS: return true is list already contains a subject with same name; otherwise return false
-    public boolean isDuplicateSubject(String subjectName) {
+    //MODIFIES: this
+    private void removeSubject() {
+        System.out.println("Enter name of subject to remove and click Enter:");
+        String subjectName = input.next();
 
-        return hasDuplicateName(subjectName, listOfSubjects.getListOfSubjects());
+        listOfSubjects.removeSubject(subjectName);
     }
 
     //EFFECTS: displays a list of topics in selected subject and other menu options
@@ -261,30 +254,11 @@ public class NoteManager {
         System.out.println("Enter name for topic and click Enter:");
         String topicName = input.next();
 
-        if (isDuplicateTopic(topicName, selectedSubject.getListOfTopics())) {
+        if (selectedSubject.containsDuplicateTopic(topicName)) {
             System.out.println("Error: You cannot have topics with the same name.\n"
                     + "Please try again.");
         } else {
             selectedSubject.addTopic(new Topic(topicName));
         }
     }
-
-    //REQUIRES: topicName is non-empty
-    //EFFECTS: return true is list already contains a topic with same name; otherwise return false
-    public boolean isDuplicateTopic(String topicName, LinkedHashSet<Topic> listOfTopics) {
-
-        return hasDuplicateName(topicName, listOfTopics);
-    }
-
-    public boolean hasDuplicateName(String name, LinkedHashSet<? extends HasName> list) {
-        boolean isDuplicate = false;
-
-        for (HasName e: list) {
-            if (name.equals(e.getName())) {
-                isDuplicate = true;
-            }
-        }
-        return isDuplicate;
-    }
-
 }
