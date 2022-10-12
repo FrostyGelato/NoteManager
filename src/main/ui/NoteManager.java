@@ -1,9 +1,6 @@
 package ui;
 
-import model.HasName;
-import model.Note;
-import model.Subject;
-import model.Topic;
+import model.*;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -12,7 +9,7 @@ import java.util.Scanner;
 
 public class NoteManager {
     private Scanner input;
-    private LinkedHashSet<Subject> listOfSubjects;
+    private ListOfSubjects listOfSubjects;
 
     //EFFECTS: runs the note manager application
     public NoteManager() {
@@ -47,7 +44,7 @@ public class NoteManager {
     //EFFECTS: initialize input and list of subjects
     private void init() {
         input = new Scanner(System.in);
-        listOfSubjects = new LinkedHashSet<>();
+        listOfSubjects = new ListOfSubjects();
     }
 
     //EFFECTS: displays a list of subjects and other options
@@ -55,10 +52,10 @@ public class NoteManager {
         System.out.println("Subject Menu\n");
         System.out.println("Subject List:");
 
-        if (listOfSubjects.isEmpty()) {
+        if (listOfSubjects.getListOfSubjects().isEmpty()) {
             System.out.println("You have no subjects.");
         } else {
-            for (Subject s: listOfSubjects) {
+            for (Subject s: listOfSubjects.getListOfSubjects()) {
                 System.out.println(s.getName());
             }
         }
@@ -78,7 +75,7 @@ public class NoteManager {
         } else if (userResponse.equals("r")) {
             removeSubject();
         } else {
-            for (Subject s: listOfSubjects) {
+            for (Subject s: listOfSubjects.getListOfSubjects()) {
                 if (userResponse.equals(s.getName())) {
 
                     boolean keepGoing = true;
@@ -104,15 +101,8 @@ public class NoteManager {
     private void removeSubject() {
         System.out.println("Enter name of subject to remove and click Enter:");
         String subjectName = input.next();
-        Subject subjectToBeRemoved = null;
 
-        for (Subject s: listOfSubjects) {
-            if (subjectName.equals(s.getName())) {
-                subjectToBeRemoved = s;
-            }
-        }
-
-        listOfSubjects.remove(subjectToBeRemoved);
+        listOfSubjects.removeSubject(subjectName);
     }
 
     //MODIFIES: this
@@ -125,7 +115,7 @@ public class NoteManager {
             System.out.println("Error: You cannot have subjects with the same name.\n"
                     + "Please try again.");
         } else {
-            listOfSubjects.add(new Subject(subjectName));
+            listOfSubjects.addSubject(subjectName);
         }
     }
 
@@ -133,7 +123,7 @@ public class NoteManager {
     //EFFECTS: return true is list already contains a subject with same name; otherwise return false
     public boolean isDuplicateSubject(String subjectName) {
 
-        return hasDuplicateName(subjectName, listOfSubjects);
+        return hasDuplicateName(subjectName, listOfSubjects.getListOfSubjects());
     }
 
     //EFFECTS: displays a list of topics in selected subject and other menu options

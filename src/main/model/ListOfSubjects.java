@@ -21,7 +21,7 @@ public class ListOfSubjects {
 
     //REQUIRES:
     public void removeSubject(String name) {
-
+        listOfSubjects.removeIf(subject -> subject.getName().equals(name));
     }
 
     public LinkedHashSet<Subject> getListOfSubjects() {
