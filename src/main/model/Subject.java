@@ -20,6 +20,13 @@ public class Subject extends HasNameAndList {
         listOfTopics.add(topic);
     }
 
+    //REQUIRES: topicName is non-empty string, there is no topic with same name in list
+    //MODIFIES: this
+    //EFFECTS: constructs a topic with topicName and adds it to list
+    public void addTopic(String topicName) {
+        addTopic(new Topic(topicName));
+    }
+
     //MODIFIES: this
     //EFFECTS: if the given topic is in list of topics, removes it; otherwise, do nothing
     public void removeTopic(Topic topic) {

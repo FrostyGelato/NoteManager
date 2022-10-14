@@ -5,6 +5,7 @@ import model.*;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Scanner;
 
 public class NoteManager {
@@ -49,21 +50,18 @@ public class NoteManager {
 
     //EFFECTS: displays a list of subjects and other options
     private void displaySubjectMenu() {
+        LinkedHashSet<Subject> subjectList = listOfSubjects.getListOfSubjects();
+
         System.out.println("Subject Menu\n");
         System.out.println("Subject List:");
 
-        if (listOfSubjects.getListOfSubjects().isEmpty()) {
+        if (subjectList.isEmpty()) {
             System.out.println("You have no subjects.");
         } else {
-            for (Subject s: listOfSubjects.getListOfSubjects()) {
-                System.out.println(s.getName());
-            }
+            printNamesInList(subjectList);
         }
 
-        System.out.println("\nEnter the name of the subject you wish to open\n"
-                + "Or select from the following options:");
-        System.out.println("n -> create new subject");
-        System.out.println("r -> remove a subject");
+        printOptions("subject", "create");
         System.out.println("q -> quit");
     }
 
@@ -121,23 +119,18 @@ public class NoteManager {
 
     //EFFECTS: displays a list of topics in selected subject and other menu options
     private void displayTopicMenu(Subject selectedSubject) {
+        LinkedHashSet<Topic> topicList = selectedSubject.getListOfTopics();
 
         System.out.println("Topic Menu\n");
-
         System.out.println("Topic List for " + selectedSubject.getName() + ":");
 
-        if (selectedSubject.getListOfTopics().isEmpty()) {
+        if (topicList.isEmpty()) {
             System.out.println("You have no topics.");
         } else {
-            for (Topic t: selectedSubject.getListOfTopics()) {
-                System.out.println(t.getName());
-            }
+            printNamesInList(topicList);
         }
 
-        System.out.println("\nEnter the name of the topic you wish to open\n"
-                + "Or select from the following options:");
-        System.out.println("n -> create new topic");
-        System.out.println("r -> remove a topic");
+        printOptions("topic", "create");
         System.out.println("s -> return to subject menu");
     }
 
@@ -180,7 +173,7 @@ public class NoteManager {
     private void processNoteMenuInput(Topic selectedTopic, String userResponse) {
         if (userResponse.equals("n")) {
             System.out.println("Enter the full path of the note:");
-            selectedTopic.addNote(new Note(Path.of(input.next())));
+            selectedTopic.addNote(Path.of(input.next()));
         } else if (userResponse.equals("r")) {
             removeNote(selectedTopic);
         } else if (userResponse.equals("c")) {
@@ -236,18 +229,9 @@ public class NoteManager {
             printListOfNotes(selectedTopic);
         }
 
-        System.out.println("\nEnter the name of the note you wish to open\n"
-                + "Or select from the following options:");
-        System.out.println("n -> import new note");
-        System.out.println("r -> remove a note");
+        printOptions("note", "import");
         System.out.println("c -> change note status");
         System.out.println("s -> return to topic menu");
-    }
-
-    private void printListOfNotes(Topic selectedTopic) {
-        for (Note n: selectedTopic.getListOfNotes()) {
-            System.out.println(n.getName() + " - " + n.getStatus() + " - " + n.getFileLocation());
-        }
     }
 
     private void createNewTopic(Subject selectedSubject) {
@@ -258,7 +242,26 @@ public class NoteManager {
             System.out.println("Error: You cannot have topics with the same name.\n"
                     + "Please try again.");
         } else {
-            selectedSubject.addTopic(new Topic(topicName));
+            selectedSubject.addTopic(topicName);
+        }
+    }
+
+    private void printOptions(String item, String action) {
+        System.out.println("\nEnter the name of the " + item + " you wish to open\n"
+                + "Or select from the following options:");
+        System.out.println("n -> " + action + " new " + item);
+        System.out.println("r -> remove a " + item);
+    }
+
+    private void printListOfNotes(Topic selectedTopic) {
+        for (Note n: selectedTopic.getListOfNotes()) {
+            System.out.println(n.getName() + " - " + n.getStatus() + " - " + n.getFileLocation());
+        }
+    }
+
+    private void printNamesInList(LinkedHashSet<? extends HasNameAndList> list) {
+        for (HasNameAndList e: list) {
+            System.out.println(e.getName());
         }
     }
 }

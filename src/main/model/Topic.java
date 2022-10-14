@@ -1,5 +1,6 @@
 package model;
 
+import java.nio.file.Path;
 import java.util.LinkedHashSet;
 
 // Represents a topic that can hold a list of notes related to that topic
@@ -18,6 +19,13 @@ public class Topic extends HasNameAndList {
     //EFFECTS: adds given note to list of notes unless it's already there, in which case do nothing
     public void addNote(Note note) {
         listOfNotes.add(note);
+    }
+
+    //REQUIRES: filePath is the path of a file in the filesystem
+    //MODIFIES: this
+    //EFFECTS: constructs a new note with filePath and adds it to list of notes
+    public void addNote(Path filePath) {
+        addNote(new Note(filePath));
     }
 
     //MODIFIES: this
