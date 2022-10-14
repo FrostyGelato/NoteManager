@@ -2,12 +2,12 @@ package model;
 
 import java.util.LinkedHashSet;
 
-public abstract class ContainsList {
+public abstract class HasList {
 
-    protected boolean isDuplicateName(String name, LinkedHashSet<? extends HasNameAndList> list) {
+    protected boolean isDuplicateName(String name, LinkedHashSet<? extends HasName> list) {
         boolean isDuplicate = false;
 
-        for (HasNameAndList e: list) {
+        for (HasName e: list) {
             if (name.equals(e.getName())) {
                 isDuplicate = true;
             }

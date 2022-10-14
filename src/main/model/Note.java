@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 // Represents a note that is linked to a file in the filesystem
-public class Note {
+public class Note implements HasName {
     private String name;
     private Path fileLocation;
     private Status status;

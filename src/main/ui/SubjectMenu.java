@@ -1,5 +1,6 @@
 package ui;
 
+import model.HasName;
 import model.ListOfSubjects;
 import model.Subject;
 
@@ -21,14 +22,9 @@ public class SubjectMenu extends Menu {
         System.out.println("Subject Menu\n");
         System.out.println("Subject List:");
 
-        if (subjectList.isEmpty()) {
-            System.out.println("You have no subjects.");
-        } else {
-            printNamesInList(subjectList);
-        }
+        printNamesInListOrNone(subjectList, "subject");
 
-        printOptions("subject", "create");
-        System.out.println("q -> quit");
+        printAllOptions("subject", "create");
     }
 
     //MODIFIES: this
@@ -83,8 +79,12 @@ public class SubjectMenu extends Menu {
         listOfSubjects.removeSubject(subjectName);
     }
 
-    private void init() {
-        input = new Scanner(System.in);
+    protected void printExtraOptions() {
+        System.out.println("q -> quit");
+    }
+
+    protected void init() {
+        super.init();
         topicMenu = new TopicMenu();
         listOfSubjects = new ListOfSubjects();
     }

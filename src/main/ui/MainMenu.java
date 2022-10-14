@@ -2,7 +2,8 @@ package ui;
 
 import java.util.Scanner;
 
-public class MainMenu extends Menu {
+public class MainMenu {
+    private Scanner input;
     private SubjectMenu subjectMenu;
 
     //EFFECTS: runs the note manager application

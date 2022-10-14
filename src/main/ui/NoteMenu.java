@@ -1,10 +1,12 @@
 package ui;
 
+import model.HasName;
 import model.Note;
 import model.Topic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
 
 public class NoteMenu extends Menu {
@@ -21,12 +23,10 @@ public class NoteMenu extends Menu {
         if (selectedTopic.getListOfNotes().isEmpty()) {
             System.out.println("You have no notes.");
         } else {
-            printListOfNotes(selectedTopic);
+            printNotesList(selectedTopic.getListOfNotes());
         }
 
-        printOptions("note", "import");
-        System.out.println("c -> change note status");
-        System.out.println("s -> return to topic menu");
+        printAllOptions("note", "import");
     }
 
     void processNoteMenuInput(Topic selectedTopic, String userResponse) {
@@ -54,7 +54,7 @@ public class NoteMenu extends Menu {
 
     private void changeNoteStatus(Topic selectedTopic) {
         System.out.println("Here are your notes:");
-        printListOfNotes(selectedTopic);
+        printNotesList(selectedTopic.getListOfNotes());
         System.out.println("Enter path of note you wish to change:");
         String file = input.next();
 
@@ -75,13 +75,14 @@ public class NoteMenu extends Menu {
         selectedTopic.removeNote(filePath);
     }
 
-    private void printListOfNotes(Topic selectedTopic) {
-        for (Note n: selectedTopic.getListOfNotes()) {
+    private void printNotesList(LinkedHashSet<Note> listOfNotes) {
+        for (Note n: listOfNotes) {
             System.out.println(n.getName() + " - " + n.getStatus() + " - " + n.getFileLocation());
         }
     }
 
-    private void init() {
-        input = new Scanner(System.in);
+    protected void printExtraOptions() {
+        System.out.println("c -> change note status");
+        System.out.println("s -> return to topic menu");
     }
 }

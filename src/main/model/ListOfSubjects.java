@@ -2,7 +2,7 @@ package model;
 
 import java.util.LinkedHashSet;
 
-public class ListOfSubjects extends ContainsList {
+public class ListOfSubjects extends HasList {
 
     private LinkedHashSet<Subject> listOfSubjects;
 

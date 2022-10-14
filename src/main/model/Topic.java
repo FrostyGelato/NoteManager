@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.util.LinkedHashSet;
 
 // Represents a topic that can hold a list of notes related to that topic
-public class Topic extends HasNameAndList {
+public class Topic extends HasList implements HasName {
     private String name;
     private LinkedHashSet<Note> listOfNotes;
 

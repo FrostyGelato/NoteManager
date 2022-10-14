@@ -20,14 +20,9 @@ public class TopicMenu extends Menu {
 
         printMenuHeader(selectedSubject, "Topic");
 
-        if (topicList.isEmpty()) {
-            System.out.println("You have no topics.");
-        } else {
-            printNamesInList(topicList);
-        }
+        printNamesInListOrNone(topicList, "topic");
 
-        printOptions("topic", "create");
-        System.out.println("s -> return to subject menu");
+        printAllOptions("topic", "create");
     }
 
     void processTopicMenuInput(Subject selectedSubject, String userResponse) {
@@ -78,8 +73,12 @@ public class TopicMenu extends Menu {
         selectedSubject.removeTopic(topicName);
     }
 
-    private void init() {
-        input = new Scanner(System.in);
+    protected void printExtraOptions() {
+        System.out.println("s -> return to subject menu");
+    }
+
+    protected void init() {
+        super.init();
         noteMenu = new NoteMenu();
     }
 }
