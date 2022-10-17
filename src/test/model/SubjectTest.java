@@ -3,6 +3,9 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SubjectTest {
@@ -23,31 +26,66 @@ public class SubjectTest {
     void testAddTopic() {
         Topic testTopic = new Topic("Logarithm");
         testSubject.addTopic(testTopic);
-        assertTrue(testSubject.getListOfTopics().contains(testTopic));
+
+        LinkedHashSet<Topic> topicList = testSubject.getListOfTopics();
+        assertTrue(topicList.contains(testTopic));
+        assertEquals(1, topicList.size());
     }
 
     @Test
     void testAddTopicMultiple() {
         Topic testLogTopic = new Topic("Logarithm");
         testSubject.addTopic(testLogTopic);
-        assertTrue(testSubject.getListOfTopics().contains(testLogTopic));
+
+        LinkedHashSet<Topic> topicList = testSubject.getListOfTopics();
+        assertTrue(topicList.contains(testLogTopic));
+        assertEquals(1, topicList.size());
 
         Topic testExpTopic = new Topic("Exponent");
         testSubject.addTopic(testExpTopic);
-        assertTrue(testSubject.getListOfTopics().contains(testExpTopic));
+
+        topicList = testSubject.getListOfTopics();
+        assertTrue(topicList.contains(testExpTopic));
+        assertTrue(topicList.contains(testLogTopic));
+        assertEquals(2, topicList.size());
     }
 
     @Test
     void testAddTopicDuplicate() {
         Topic testTopic = new Topic("Logarithm");
+        testSubject.addTopic(testTopic);
+
+        LinkedHashSet<Topic> topicList = testSubject.getListOfTopics();
+        assertTrue(topicList.contains(testTopic));
+        assertEquals(1, topicList.size());
 
         testSubject.addTopic(testTopic);
-        assertTrue(testSubject.getListOfTopics().contains(testTopic));
-        assertEquals(1, testSubject.getListOfTopics().size());
 
-        testSubject.addTopic(testTopic);
-        assertTrue(testSubject.getListOfTopics().contains(testTopic));
-        assertEquals(1, testSubject.getListOfTopics().size());
+        topicList = testSubject.getListOfTopics();
+        assertTrue(topicList.contains(testTopic));
+        assertEquals(1, topicList.size());
+    }
+
+    @Test
+    void testAddTopicByName() {
+        testSubject.addTopic("Logarithm");
+
+        LinkedHashSet<Topic> topicList = testSubject.getListOfTopics();
+        Iterator<Topic> iter = topicList.iterator();
+        assertEquals("Logarithm", iter.next().getName());
+        assertEquals(1, topicList.size());
+    }
+
+    @Test
+    void testAddTopicByNameMultiple() {
+        testSubject.addTopic("Logarithm");
+        testSubject.addTopic("Exponent");
+
+        LinkedHashSet<Topic> topicList = testSubject.getListOfTopics();
+        Iterator<Topic> iter = topicList.iterator();
+        assertEquals("Logarithm", iter.next().getName());
+        assertEquals("Exponent", iter.next().getName());
+        assertEquals(2, topicList.size());
     }
 
     @Test
@@ -56,28 +94,46 @@ public class SubjectTest {
         testSubject.addTopic(testTopic);
         assertTrue(testSubject.getListOfTopics().contains(testTopic));
 
-        testSubject.removeTopic(testTopic);
-        assertFalse(testSubject.getListOfTopics().contains(testTopic));
+        testSubject.removeTopic("Logarithm");
+        LinkedHashSet<Topic> topicList = testSubject.getListOfTopics();
+        assertFalse(topicList.contains(testTopic));
+        assertEquals(0, topicList.size());
     }
 
     @Test
-    void testRemoveTopicNotPresent() {
-        Topic testTopic1 = new Topic("Logarithm");
-        testSubject.addTopic(testTopic1);
-
-        Topic testTopic2 = new Topic("Trigonometry");
-        testSubject.removeTopic(testTopic2);
-        assertTrue(testSubject.getListOfTopics().contains(testTopic1));
-        assertEquals(1, testSubject.getListOfTopics().size());
-    }
-
-    @Test
-    void testRemoveTopicByName() {
+    void testRemoveTopicMultiple() {
         Topic testTopic = new Topic("Logarithm");
         testSubject.addTopic(testTopic);
-        assertTrue(testSubject.getListOfTopics().contains(testTopic));
+        Topic testTopic2 = new Topic("Exponent");
+        testSubject.addTopic(testTopic2);
+
+        testSubject.removeTopic("Exponent");
+        LinkedHashSet<Topic> topicList = testSubject.getListOfTopics();
+        assertFalse(topicList.contains(testTopic2));
+        assertEquals(1, topicList.size());
 
         testSubject.removeTopic("Logarithm");
-        assertFalse(testSubject.getListOfTopics().contains(testTopic));
+        topicList = testSubject.getListOfTopics();
+        assertFalse(topicList.contains(testTopic));
+        assertEquals(0, topicList.size());
+    }
+
+    @Test
+    void testContainsDuplicateSubjectEmptyList() {
+        assertFalse(testSubject.containsDuplicateTopic("Logarithm"));
+    }
+
+    @Test
+    void testContainsDuplicateSubject() {
+        testSubject.addTopic("Logarithm");
+        testSubject.addTopic("Exponent");
+        assertTrue(testSubject.containsDuplicateTopic("Logarithm"));
+    }
+
+    @Test
+    void testContainsDuplicateSubjectNoDuplicate() {
+        testSubject.addTopic("Logarithm");
+        testSubject.addTopic("Exponent");
+        assertFalse(testSubject.containsDuplicateTopic("Probability"));
     }
 }

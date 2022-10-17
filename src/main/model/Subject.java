@@ -27,12 +27,6 @@ public class Subject extends HasList implements HasName {
         addTopic(new Topic(topicName));
     }
 
-    //MODIFIES: this
-    //EFFECTS: if the given topic is in list of topics, removes it; otherwise, do nothing
-    public void removeTopic(Topic topic) {
-        listOfTopics.remove(topic);
-    }
-
     //REQUIRES: topicName is non-empty string, list contains a topic with same name as given name
     //MODIFIES: this
     //EFFECTS: remove topic with given name from list of topics

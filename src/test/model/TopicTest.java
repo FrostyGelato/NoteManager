@@ -6,6 +6,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,30 +42,57 @@ public class TopicTest {
     void testAddNote() {
         Note testNote = new Note(testFile1Path);
         testTopic.addNote(testNote);
-        assertTrue(testTopic.getListOfNotes().contains(testNote));
+        LinkedHashSet<Note> noteList = testTopic.getListOfNotes();
+        assertTrue(noteList.contains(testNote));
+        assertEquals(1, noteList.size());
     }
 
     @Test
     void testAddNoteMultiple() {
         Note testNote1 = new Note(testFile1Path);
         testTopic.addNote(testNote1);
-        assertTrue(testTopic.getListOfNotes().contains(testNote1));
+        LinkedHashSet<Note> noteList = testTopic.getListOfNotes();
+        assertTrue(noteList.contains(testNote1));
+        assertEquals(1, noteList.size());
 
         Note testNote2 = new Note(testFile2Path);
         testTopic.addNote(testNote2);
-        assertTrue(testTopic.getListOfNotes().contains(testNote2));
+        assertTrue(noteList.contains(testNote2));
+        assertEquals(2, noteList.size());
     }
 
     @Test
     void testAddNoteDuplicate() {
         Note testNote = new Note(testFile1Path);
         testTopic.addNote(testNote);
-        assertTrue(testTopic.getListOfNotes().contains(testNote));
-        assertEquals(1, testTopic.getListOfNotes().size());
+        LinkedHashSet<Note> noteList = testTopic.getListOfNotes();
+        assertTrue(noteList.contains(testNote));
+        assertEquals(1, noteList.size());
 
         testTopic.addNote(testNote);
-        assertTrue(testTopic.getListOfNotes().contains(testNote));
-        assertEquals(1, testTopic.getListOfNotes().size());
+        assertTrue(noteList.contains(testNote));
+        assertEquals(1, noteList.size());
+    }
+
+    @Test
+    void testAddByPathNote() {
+        testTopic.addNote(testFile1Path);
+        LinkedHashSet<Note> noteList = testTopic.getListOfNotes();
+        Iterator<Note> iter = noteList.iterator();
+        assertEquals(testFile1Path, iter.next().getFileLocation());
+        assertEquals(1, noteList.size());
+    }
+
+    @Test
+    void testAddNoteByPathMultiple() {
+        testTopic.addNote(testFile1Path);
+        testTopic.addNote(testFile2Path);
+
+        LinkedHashSet<Note> noteList = testTopic.getListOfNotes();
+        Iterator<Note> iter = noteList.iterator();
+        assertEquals(testFile1Path, iter.next().getFileLocation());
+        assertEquals(testFile2Path, iter.next().getFileLocation());
+        assertEquals(2, noteList.size());
     }
 
     @Test
@@ -72,28 +101,30 @@ public class TopicTest {
         testTopic.addNote(testNote);
         assertTrue(testTopic.getListOfNotes().contains(testNote));
 
-        testTopic.removeNote(testNote);
-        assertFalse(testTopic.getListOfNotes().contains(testNote));
+        testTopic.removeNote(testFile1Path.toString());
+        LinkedHashSet<Note> noteList = testTopic.getListOfNotes();
+        assertFalse(noteList.contains(testNote));
+        assertEquals(0, noteList.size());
     }
 
     @Test
-    void testRemoveNoteNotPresent() {
+    void testRemoveNoteMultiple() {
         Note testNote1 = new Note(testFile1Path);
         testTopic.addNote(testNote1);
-        assertTrue(testTopic.getListOfNotes().contains(testNote1));
+        Note testNote2 = new Note(testFile2Path);
+        testTopic.addNote(testNote2);
 
-        Note testNote2 = new Note(testFile1Path);
-        testTopic.removeNote(testNote2);
         assertTrue(testTopic.getListOfNotes().contains(testNote1));
-    }
-
-    @Test
-    void testRemoveNoteString() {
-        Note testNote1 = new Note(testFile1Path);
-        testTopic.addNote(testNote1);
-        assertTrue(testTopic.getListOfNotes().contains(testNote1));
+        assertTrue(testTopic.getListOfNotes().contains(testNote2));
 
         testTopic.removeNote(testFile1Path.toString());
-        assertFalse(testTopic.getListOfNotes().contains(testNote1));
+        LinkedHashSet<Note> noteList = testTopic.getListOfNotes();
+        assertFalse(noteList.contains(testNote1));
+        assertTrue(noteList.contains(testNote2));
+        assertEquals(1, noteList.size());
+
+        testTopic.removeNote(testFile2Path.toString());
+        assertFalse(testTopic.getListOfNotes().contains(testNote2));
+        assertEquals(0, noteList.size());
     }
 }

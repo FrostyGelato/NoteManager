@@ -28,15 +28,9 @@ public class Topic extends HasList implements HasName {
         addNote(new Note(filePath));
     }
 
+    //REQUIRES: filePath is a valid path to a file, assumes note with filePath exists in list
     //MODIFIES: this
-    //EFFECTS: if the given note is in list of notes, removes it; otherwise, do nothing
-    public void removeNote(Note note) {
-        listOfNotes.remove(note);
-    }
-
-    //REQUIRES: filePath is a valid path to a file
-    //MODIFIES: this
-    //EFFECTS: if there is a note with the given path in list of notes, removes it; otherwise, do nothing
+    //EFFECTS: removes note with the given path in list of notes
     public void removeNote(String filePath) {
         listOfNotes.removeIf(note -> note.getFileLocation().toString().equals(filePath));
     }
