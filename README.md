@@ -9,11 +9,9 @@ My project will be a notes management application. **It will keep track of notes
 - System search brings up too many irrelevant results.
 
 ## User Stories
+- As a user, I want to be able to add a subject to a list of subjects
+- As a user, I want to be able to view a list of my subjects
+- As a user, I want to be able to remove a subject
 - As a user, I want to be able to add a topic to a subject
 - As a user, I want to be able to view a list of topics in a subject
 - As a user, I want to be able to remove a topic from a subject
-- As a user, I want to be able to add a note file to a topic
-- As a user, I want to be able to view a list of note files in a topic
-- As a user, I want to be able to mark a note as complete, incomplete, and need revision
-- As a user, I want to be able to open the note file from inside the application
-- As a user, I want to be able to remove a note file from a topic
