@@ -1,7 +1,5 @@
 package model;
 
-import java.awt.*;
-import java.io.IOException;
 import java.nio.file.Path;
 
 // Represents a note that is linked to a file in the filesystem
@@ -16,13 +14,6 @@ public class Note implements HasName {
         name = String.valueOf(file.getFileName());
         fileLocation = file;
         status = Status.INCOMPLETE;
-    }
-
-    //REQUIRES: the file at the fileLocation exists
-    //EFFECTS: open the file linked to this note in external application
-    public void openFile() throws IOException {
-        Desktop desktop = Desktop.getDesktop();
-        desktop.open(fileLocation.toFile());
     }
 
     //REQUIRES: statusNum = 1, 2, or 3

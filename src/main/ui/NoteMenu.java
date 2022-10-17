@@ -3,6 +3,7 @@ package ui;
 import model.Note;
 import model.Topic;
 
+import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,6 +11,7 @@ import java.util.LinkedHashSet;
 
 public class NoteMenu extends Menu {
 
+    //MODIFIES: this
     //EFFECTS: allows for user input
     NoteMenu() {
         init();
@@ -29,7 +31,8 @@ public class NoteMenu extends Menu {
         printAllOptions("note", "import");
     }
 
-    //EFFECTS: handles user input
+    //MODIFIES: this
+    //EFFECTS: processes user input
     void processNoteMenuInput(Topic selectedTopic, String userResponse) {
         if (userResponse.equals("n")) {
             createNote(selectedTopic);
@@ -42,7 +45,8 @@ public class NoteMenu extends Menu {
                 if (userResponse.equals(n.getName())) {
                     try {
                         System.out.println("Opening file...");
-                        n.openFile();
+                        Desktop desktop = Desktop.getDesktop();
+                        desktop.open(n.getFileLocation().toFile());
                     } catch (IOException e) {
                         System.out.println("Error: Unable to open file");
                     }
@@ -52,6 +56,9 @@ public class NoteMenu extends Menu {
         }
     }
 
+    //REQUIRES: user input non-empty string
+    //MODIFIES: this
+    //EFFECTS: creates a new note based on user input
     private void createNote(Topic selectedTopic) {
         System.out.println("Enter the full path of the note:");
         String noteStringPath = input.next();
@@ -64,6 +71,8 @@ public class NoteMenu extends Menu {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: changes the status of a note based on user input
     private void changeNoteStatus(Topic selectedTopic) {
         System.out.println("Here are your notes:");
         printNotesList(selectedTopic.getListOfNotes());
@@ -80,6 +89,8 @@ public class NoteMenu extends Menu {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: removes a note based on user input, if note with given path exists; otherwise, do nothing
     private void removeNote(Topic selectedTopic) {
         System.out.println("Enter path of note to remove and click Enter:");
         String filePath = input.next();
@@ -87,12 +98,14 @@ public class NoteMenu extends Menu {
         selectedTopic.removeNote(filePath);
     }
 
+    //EFFECTS: prints the list of notes
     private void printNotesList(LinkedHashSet<Note> listOfNotes) {
         for (Note n: listOfNotes) {
             System.out.println(n.getName() + " - " + n.getStatus() + " - " + n.getFileLocation());
         }
     }
 
+    //EFFECTS: prints options solely meant for handling notes
     protected void printExtraOptions() {
         System.out.println("c -> change note status");
         System.out.println("s -> return to topic menu");

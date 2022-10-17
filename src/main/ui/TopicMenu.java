@@ -8,6 +8,8 @@ import java.util.LinkedHashSet;
 public class TopicMenu extends Menu {
     NoteMenu noteMenu = new NoteMenu();
 
+    //MODIFIES: this
+    //EFFECTS: allows for user input and allows for handling of notes
     TopicMenu() {
         init();
     }
@@ -24,8 +26,9 @@ public class TopicMenu extends Menu {
         printAllOptions("topic", "create");
     }
 
+    //MODIFIES: this
+    //EFFECTS: processes user input
     void processTopicMenuInput(Subject selectedSubject, String userResponse) {
-
         if (userResponse.equals("n")) {
             createNewTopic(selectedSubject);
         } else if (userResponse.equals("r")) {
@@ -53,6 +56,9 @@ public class TopicMenu extends Menu {
         }
     }
 
+    //REQUIRES: user input non-empty string
+    //MODIFIES: this
+    //EFFECTS: creates a new topic based on user input
     private void createNewTopic(Subject selectedSubject) {
         System.out.println("Enter name for topic and click Enter:");
         String topicName = input.next();
@@ -65,6 +71,8 @@ public class TopicMenu extends Menu {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: removes a topic based on user input, if topic with given name exists; otherwise, do nothing
     private void removeTopic(Subject selectedSubject) {
         System.out.println("Enter name of topic to remove and click Enter:");
         String topicName = input.next();
@@ -72,10 +80,13 @@ public class TopicMenu extends Menu {
         selectedSubject.removeTopic(topicName);
     }
 
+    //EFFECTS: prints option to return to previous menu
     protected void printExtraOptions() {
         System.out.println("s -> return to subject menu");
     }
 
+    //MODIFIES: this
+    //EFFECTS: allows for user input and allows for handling of notes
     protected void init() {
         super.init();
         noteMenu = new NoteMenu();

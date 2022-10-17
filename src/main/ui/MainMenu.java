@@ -13,7 +13,7 @@ public class MainMenu {
     }
 
     //MODIFIES: this
-    //EFFECTS: displays console UI and receives user input
+    //EFFECTS: displays console UI and processes user input
     private void runManager() {
 
         boolean keepGoing = true;

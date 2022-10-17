@@ -9,6 +9,8 @@ public class SubjectMenu extends Menu {
     TopicMenu topicMenu = new TopicMenu();
     private ListOfSubjects listOfSubjects;
 
+    //MODIFIES: this
+    //EFFECTS: allows for user input, sets up a list for subjects, and allows for handling of topics
     SubjectMenu() {
         init();
     }
@@ -26,7 +28,7 @@ public class SubjectMenu extends Menu {
     }
 
     //MODIFIES: this
-    //EFFECTS: allows user to create new subject and displays the topic menu with a subject
+    //EFFECTS: processes user input
     void processSubjectMenuInput(String userResponse) {
         if (userResponse.equals("n")) {
             createNewSubject();
@@ -55,6 +57,7 @@ public class SubjectMenu extends Menu {
         }
     }
 
+    //REQUIRES: user input non-empty string
     //MODIFIES: this
     //EFFECTS: asks user for subject name and creates subject with given name in list
     private void createNewSubject() {
@@ -70,6 +73,7 @@ public class SubjectMenu extends Menu {
     }
 
     //MODIFIES: this
+    //EFFECTS: removes a subject based on user input, if subject with given name exists; otherwise, do nothing
     private void removeSubject() {
         System.out.println("Enter name of subject to remove and click Enter:");
         String subjectName = input.next();
@@ -77,10 +81,13 @@ public class SubjectMenu extends Menu {
         listOfSubjects.removeSubject(subjectName);
     }
 
+    //EFFECTS: prints quit option
     protected void printExtraOptions() {
         System.out.println("q -> quit");
     }
 
+    //MODIFIES: this
+    //EFFECTS: allows for user input, sets up a list for subjects, and allows for handling of topics
     protected void init() {
         super.init();
         topicMenu = new TopicMenu();
