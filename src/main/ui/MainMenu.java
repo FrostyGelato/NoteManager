@@ -21,6 +21,8 @@ public class MainMenu {
 
         init();
 
+        System.out.println("Notice: Commands need to be in lowercase, and names are case-sensitive.");
+
         while (keepGoing) {
             subjectMenu.displaySubjectMenu();
             userResponse = input.next().toLowerCase();

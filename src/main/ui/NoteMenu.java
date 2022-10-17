@@ -62,6 +62,7 @@ public class NoteMenu extends Menu {
     //EFFECTS: creates a new note based on user input
     private void createNote(Topic selectedTopic) {
         System.out.println("Enter the full path of the note:");
+        System.out.println("Avoid entering paths with spaces in the middle.");
         String noteStringPath = input.next();
         Path notePath = Paths.get(noteStringPath);
         if (selectedTopic.isDuplicatePath(notePath)) {
