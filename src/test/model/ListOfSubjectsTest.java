@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ListOfSubjectsTest {
 
@@ -74,5 +73,24 @@ public class ListOfSubjectsTest {
         testList.removeSubject("Math");
         testList.removeSubject("English");
         assertTrue(testList.getListOfSubjects().isEmpty());
+    }
+
+    @Test
+    void testContainsDuplicateSubjectEmptyList() {
+        assertFalse(testList.containsDuplicateSubject("Math"));
+    }
+
+    @Test
+    void testContainsDuplicateSubject() {
+        testList.addSubject("Math");
+        testList.addSubject("Biology");
+        assertTrue(testList.containsDuplicateSubject("Math"));
+    }
+
+    @Test
+    void testContainsDuplicateSubjectNoDuplicate() {
+        testList.addSubject("Physics");
+        testList.addSubject("Biology");
+        assertFalse(testList.containsDuplicateSubject("Math"));
     }
 }

@@ -22,7 +22,7 @@ class NoteTest {
             testFilePath = tempDir.resolve( "Vocabulary.txt" );
         }
         catch( InvalidPathException ipe ) {
-            System.err.println("could not create test file");
+            System.err.println("Could not create test file");
         }
 
         testNote = new Note(testFilePath);
@@ -36,9 +36,15 @@ class NoteTest {
     }
 
     @Test
-    void testSetStatusChange() {
+    void testSetStatusChangeToRevision() {
         testNote.setStatus(2);
         assertEquals(Status.NEED_REVISION, testNote.getStatus());
+    }
+
+    @Test
+    void testSetStatusChangeToComplete() {
+        testNote.setStatus(3);
+        assertEquals(Status.COMPLETE, testNote.getStatus());
     }
 
     @Test
