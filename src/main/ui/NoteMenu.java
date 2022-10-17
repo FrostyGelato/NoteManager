@@ -29,8 +29,7 @@ public class NoteMenu extends Menu {
 
     void processNoteMenuInput(Topic selectedTopic, String userResponse) {
         if (userResponse.equals("n")) {
-            System.out.println("Enter the full path of the note:");
-            selectedTopic.addNote(Path.of(input.next()));
+            createNote(selectedTopic);
         } else if (userResponse.equals("r")) {
             removeNote(selectedTopic);
         } else if (userResponse.equals("c")) {
@@ -47,6 +46,18 @@ public class NoteMenu extends Menu {
                     break;
                 }
             }
+        }
+    }
+
+    private void createNote(Topic selectedTopic) {
+        System.out.println("Enter the full path of the note:");
+        String notePath = input.next();
+
+        if (selectedTopic.isDuplicatePath(Path.of(notePath))) {
+            System.out.println("Error: You cannot have notes with the same path.\n"
+                    + "Please try again.");
+        } else {
+            selectedTopic.addNote(Path.of(notePath));
         }
     }
 

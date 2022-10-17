@@ -127,4 +127,20 @@ public class TopicTest {
         assertFalse(testTopic.getListOfNotes().contains(testNote2));
         assertEquals(0, noteList.size());
     }
+
+    @Test
+    void testIsDuplicatePath() {
+        Note testNote1 = new Note(testFile1Path);
+        testTopic.addNote(testNote1);
+
+        assertTrue(testTopic.isDuplicatePath(testFile1Path));
+    }
+
+    @Test
+    void testIsDuplicatePathNoDuplicate() {
+        Note testNote1 = new Note(testFile1Path);
+        testTopic.addNote(testNote1);
+
+        assertFalse(testTopic.isDuplicatePath(testFile2Path));
+    }
 }

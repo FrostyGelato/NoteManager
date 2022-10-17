@@ -35,6 +35,18 @@ public class Topic extends HasList implements HasName {
         listOfNotes.removeIf(note -> note.getFileLocation().toString().equals(filePath));
     }
 
+    //EFFECTS: returns true if list contains note with same path as filePath; otherwise, return false
+    public boolean isDuplicatePath(Path filePath) {
+        boolean isDuplicate = false;
+
+        for (Note n: listOfNotes) {
+            if (filePath.equals(n.getFileLocation())) {
+                isDuplicate = true;
+            }
+        }
+        return isDuplicate;
+    }
+
     public String getName() {
         return name;
     }
