@@ -31,7 +31,7 @@ public class Note implements HasName {
             case 2:
                 status = Status.NEED_REVISION;
                 break;
-            case 3:
+            default:
                 status = Status.COMPLETE;
                 break;
         }
