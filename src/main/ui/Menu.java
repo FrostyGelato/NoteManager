@@ -12,6 +12,7 @@ public abstract class Menu {
         input = new Scanner(System.in);
     }
 
+    //EFFECTS: prints title for menu
     protected void printMenuHeader(HasName selectedParent, String item) {
         System.out.println(item + " Menu");
         System.out.println(item + " list for " + selectedParent.getName() + ":");

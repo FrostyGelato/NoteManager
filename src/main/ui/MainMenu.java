@@ -2,6 +2,7 @@ package ui;
 
 import java.util.Scanner;
 
+//Note manager application
 public class MainMenu {
     private Scanner input;
     private SubjectMenu subjectMenu;
@@ -13,7 +14,6 @@ public class MainMenu {
 
     //MODIFIES: this
     //EFFECTS: displays console UI and receives user input
-    // from TellerApp
     private void runManager() {
 
         boolean keepGoing = true;
@@ -32,11 +32,11 @@ public class MainMenu {
             }
         }
 
-        System.out.println("Goodbye!");
+        System.out.println("The program has exited.");
     }
 
     //MODIFIES: this
-    //EFFECTS: initialize input and list of subjects
+    //EFFECTS: initialize input and constructs a menu for manipulating subjects
     private void init() {
         input = new Scanner(System.in);
         subjectMenu = new SubjectMenu();

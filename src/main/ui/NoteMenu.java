@@ -52,13 +52,14 @@ public class NoteMenu extends Menu {
     private void createNote(Topic selectedTopic) {
         System.out.println("Enter the full path of the note:");
         String notePath = input.next();
-
+/*
         if (selectedTopic.isDuplicatePath(Path.of(notePath))) {
             System.out.println("Error: You cannot have notes with the same path.\n"
                     + "Please try again.");
         } else {
             selectedTopic.addNote(Path.of(notePath));
         }
+        */
     }
 
     private void changeNoteStatus(Topic selectedTopic) {
