@@ -4,7 +4,6 @@ import model.Subject;
 import model.Topic;
 
 import java.util.LinkedHashSet;
-import java.util.Scanner;
 
 public class TopicMenu extends Menu {
     NoteMenu noteMenu = new NoteMenu();

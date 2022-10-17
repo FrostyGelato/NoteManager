@@ -9,7 +9,7 @@ public class Topic extends HasList implements HasName {
     private LinkedHashSet<Note> listOfNotes;
 
     //REQUIRES: name is non-null string
-    //EFFECTS: constructs a topic with given name, and empty list of notes
+    //EFFECTS: constructs a topic with given name and empty list of notes
     public Topic(String name) {
         this.name = name;
         listOfNotes = new LinkedHashSet<>();
@@ -21,7 +21,7 @@ public class Topic extends HasList implements HasName {
         listOfNotes.add(note);
     }
 
-    //REQUIRES: filePath is the path of a file in the filesystem
+    //REQUIRES: filePath is the path of a file in the filesystem, there is no note with same path in list
     //MODIFIES: this
     //EFFECTS: constructs a new note with filePath and adds it to list of notes
     public void addNote(Path filePath) {

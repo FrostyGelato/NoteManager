@@ -10,7 +10,7 @@ public class Note implements HasName {
     private Path fileLocation;
     private Status status;
 
-    //REQUIRES: file is a valid path to a file
+    //REQUIRES: file is a path to an existing file in the filesystem
     //EFFECTS: constructs a note with a given name of file, location of file, and incomplete status
     public Note(Path file) {
         name = String.valueOf(file.getFileName());
@@ -18,7 +18,8 @@ public class Note implements HasName {
         status = Status.INCOMPLETE;
     }
 
-    //EFFECTS: open the file linked to this note
+    //REQUIRES: the file at the fileLocation exists
+    //EFFECTS: open the file linked to this note in external application
     public void openFile() throws IOException {
         Desktop desktop = Desktop.getDesktop();
         desktop.open(fileLocation.toFile());

@@ -1,11 +1,9 @@
 package ui;
 
-import model.HasName;
 import model.ListOfSubjects;
 import model.Subject;
 
 import java.util.LinkedHashSet;
-import java.util.Scanner;
 
 public class SubjectMenu extends Menu {
     TopicMenu topicMenu = new TopicMenu();

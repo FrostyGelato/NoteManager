@@ -21,13 +21,9 @@ public abstract class Menu {
         if (list.isEmpty()) {
             System.out.println("You have no " + item + "s.");
         } else {
-            printNamesInList(list);
-        }
-    }
-
-    protected void printNamesInList(LinkedHashSet<? extends HasName> list) {
-        for (HasName e: list) {
-            System.out.println(e.getName());
+            for (HasName e: list) {
+                System.out.println(e.getName());
+            }
         }
     }
 

@@ -33,8 +33,9 @@ public class Subject extends HasList implements HasName {
         listOfTopics.remove(topic);
     }
 
+    //REQUIRES: topicName is non-empty string, list contains a topic with same name as given name
     //MODIFIES: this
-    //EFFECTS: if there is a topic with given name in list of topics, removes it; otherwise, do nothing
+    //EFFECTS: remove topic with given name from list of topics
     public void removeTopic(String topicName) {
         listOfTopics.removeIf(topic -> topic.getName().equals(topicName));
     }

@@ -1,13 +1,11 @@
 package ui;
 
-import model.HasName;
 import model.Note;
 import model.Topic;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.LinkedHashSet;
-import java.util.Scanner;
 
 public class NoteMenu extends Menu {
 
