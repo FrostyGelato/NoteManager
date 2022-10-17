@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedHashSet;
 
+// Displays the note menu where user can view their notes
 public class NoteMenu extends Menu {
 
     //MODIFIES: this

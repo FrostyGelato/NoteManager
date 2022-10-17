@@ -5,6 +5,7 @@ import model.Topic;
 
 import java.util.LinkedHashSet;
 
+// Displays the topic menu where user can view their topics
 public class TopicMenu extends Menu {
     NoteMenu noteMenu = new NoteMenu();
 

@@ -2,6 +2,7 @@ package model;
 
 import java.util.LinkedHashSet;
 
+// Represents a list of subjects
 public class ListOfSubjects extends HasList {
 
     private LinkedHashSet<Subject> listOfSubjects;

@@ -5,6 +5,7 @@ import model.HasName;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
 
+// Prints out headers and options in console ui
 public abstract class Menu {
     protected Scanner input;
 

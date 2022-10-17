@@ -2,6 +2,7 @@ package model;
 
 import java.util.LinkedHashSet;
 
+// An abstract class with implementation for checking for items with duplicate names
 public abstract class HasList {
 
     //REQUIRES: name is non-empty string

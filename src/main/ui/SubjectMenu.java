@@ -5,6 +5,7 @@ import model.Subject;
 
 import java.util.LinkedHashSet;
 
+// Displays the subject menu where user can view their subjects
 public class SubjectMenu extends Menu {
     TopicMenu topicMenu = new TopicMenu();
     private ListOfSubjects listOfSubjects;
