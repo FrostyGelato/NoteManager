@@ -57,7 +57,7 @@ public class NoteMenu extends Menu {
         }
     }
 
-    //REQUIRES: user input non-empty string
+    //REQUIRES: user input non-empty string with no spaces between characters
     //MODIFIES: this
     //EFFECTS: creates a new note based on user input
     private void createNote(Topic selectedTopic) {
