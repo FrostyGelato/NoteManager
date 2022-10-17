@@ -5,10 +5,12 @@ import model.Topic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.LinkedHashSet;
 
 public class NoteMenu extends Menu {
 
+    //EFFECTS: allows for user input
     NoteMenu() {
         init();
     }
@@ -27,6 +29,7 @@ public class NoteMenu extends Menu {
         printAllOptions("note", "import");
     }
 
+    //EFFECTS: handles user input
     void processNoteMenuInput(Topic selectedTopic, String userResponse) {
         if (userResponse.equals("n")) {
             createNote(selectedTopic);
@@ -51,15 +54,14 @@ public class NoteMenu extends Menu {
 
     private void createNote(Topic selectedTopic) {
         System.out.println("Enter the full path of the note:");
-        String notePath = input.next();
-/*
-        if (selectedTopic.isDuplicatePath(Path.of(notePath))) {
+        String noteStringPath = input.next();
+        Path notePath = Paths.get(noteStringPath);
+        if (selectedTopic.isDuplicatePath(notePath)) {
             System.out.println("Error: You cannot have notes with the same path.\n"
                     + "Please try again.");
         } else {
-            selectedTopic.addNote(Path.of(notePath));
+            selectedTopic.addNote(notePath);
         }
-        */
     }
 
     private void changeNoteStatus(Topic selectedTopic) {

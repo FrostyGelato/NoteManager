@@ -8,6 +8,8 @@ import java.util.Scanner;
 public abstract class Menu {
     protected Scanner input;
 
+    //MODIFIES: this
+    //EFFECTS: allows for user input
     protected void init() {
         input = new Scanner(System.in);
     }
@@ -18,6 +20,7 @@ public abstract class Menu {
         System.out.println(item + " list for " + selectedParent.getName() + ":");
     }
 
+    //EFFECTS: print names in list or that no items exists
     protected void printNamesInListOrNone(LinkedHashSet<?extends HasName> list, String item) {
         if (list.isEmpty()) {
             System.out.println("You have no " + item + "s.");
@@ -28,6 +31,7 @@ public abstract class Menu {
         }
     }
 
+    //EFFECTS: prints out available options for user
     protected void printAllOptions(String item, String action) {
         System.out.println("\nEnter the name of the " + item + " you wish to open\n"
                 + "Or select from the following options:");
@@ -36,5 +40,6 @@ public abstract class Menu {
         printExtraOptions();
     }
 
+    //EFFECTS: print out options unique to a menu
     protected abstract void printExtraOptions();
 }
