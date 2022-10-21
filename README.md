@@ -15,3 +15,5 @@ My project will be a notes management application. **It will keep track of notes
 - As a user, I want to be able to add a topic to a subject
 - As a user, I want to be able to view a list of topics in a subject
 - As a user, I want to be able to remove a topic from a subject
+- As a user, when I select the quit option from the application menu, I want to be reminded to save my lists of subjects, topics, and notes to file and have the option to do so or not.
+- As a user, when I start the application, I want to be given the option to load my lists of subjects, topics, and notes from file.
