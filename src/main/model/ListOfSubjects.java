@@ -1,9 +1,12 @@
 package model;
 
+import org.json.JSONArray;
+import persistence.Writable;
+
 import java.util.LinkedHashSet;
 
 // Represents a list of subjects
-public class ListOfSubjects extends HasList {
+public class ListOfSubjects extends HasList implements Writable {
 
     private LinkedHashSet<Subject> listOfSubjects;
 
@@ -30,6 +33,16 @@ public class ListOfSubjects extends HasList {
     //EFFECTS: return true if list already contains a subject with same name; otherwise return false
     public boolean containsDuplicateSubject(String name) {
         return isDuplicateName(name, listOfSubjects);
+    }
+
+    @Override
+    public JSONArray toJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Subject s : listOfSubjects) {
+            jsonArray.put(s.toJson());
+        }
+        return jsonArray;
     }
 
     public LinkedHashSet<Subject> getListOfSubjects() {

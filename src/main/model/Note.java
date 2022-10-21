@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.nio.file.Path;
 
 // Represents a note that is linked to a file in the filesystem
@@ -47,5 +50,13 @@ public class Note implements HasName {
 
     public Status getStatus() {
         return status;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("fileLocation", fileLocation);
+        json.put("status", status);
+        return json;
     }
 }

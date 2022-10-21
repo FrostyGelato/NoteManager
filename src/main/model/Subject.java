@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.LinkedHashSet;
 
 // Represents a subject that holds a list of related topics
@@ -46,5 +49,22 @@ public class Subject extends HasList implements HasName {
 
     public LinkedHashSet<Topic> getListOfTopics() {
         return listOfTopics;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("listOfTopics", topicsToJson());
+        return json;
+    }
+
+    private JSONArray topicsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Topic t: listOfTopics) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
     }
 }

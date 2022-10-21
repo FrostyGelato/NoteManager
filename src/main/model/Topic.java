@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.nio.file.Path;
 import java.util.LinkedHashSet;
 
@@ -53,5 +56,22 @@ public class Topic extends HasList implements HasName {
 
     public LinkedHashSet<Note> getListOfNotes() {
         return listOfNotes;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("listOfNotes", notesToJson());
+        return json;
+    }
+
+    private JSONArray notesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Note n: listOfNotes) {
+            jsonArray.put(n.toJson());
+        }
+
+        return jsonArray;
     }
 }
