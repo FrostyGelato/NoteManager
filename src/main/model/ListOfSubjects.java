@@ -15,11 +15,15 @@ public class ListOfSubjects extends HasList implements Writable {
         listOfSubjects = new LinkedHashSet<>();
     }
 
+    public void addSubject(Subject subject) {
+        listOfSubjects.add(subject);
+    }
+
     //REQUIRES: name is non-empty string, list does not contain subject with same name as given name
     //MODIFIES: this
     //EFFECTS: creates a subject with given name and adds it to list
     public void addSubject(String name) {
-        listOfSubjects.add(new Subject(name));
+        addSubject(new Subject(name));
     }
 
     //REQUIRES: list contains one subject with same name as given name

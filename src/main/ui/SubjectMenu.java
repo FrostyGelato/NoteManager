@@ -2,9 +2,12 @@ package ui;
 
 import model.ListOfSubjects;
 import model.Subject;
+import org.json.JSONObject;
+import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.LinkedHashSet;
 
 // Displays the subject menu where user can view their subjects
@@ -13,6 +16,7 @@ public class SubjectMenu extends Menu {
     private ListOfSubjects listOfSubjects;
     private static final String JSON_STORE = "./data/subjectlist.json";
     private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     //MODIFIES: this
     //EFFECTS: allows for user input, sets up a list for subjects, and allows for handling of topics
@@ -110,7 +114,14 @@ public class SubjectMenu extends Menu {
     }
 
     private void load() {
-        System.out.println("Data has been loaded from file.");
+
+        try {
+            listOfSubjects = jsonReader.read();
+            System.out.println("Data has been loaded from file.");
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+
     }
 
     //MODIFIES: this
@@ -120,5 +131,6 @@ public class SubjectMenu extends Menu {
         topicMenu = new TopicMenu();
         listOfSubjects = new ListOfSubjects();
         jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 }

@@ -14,9 +14,15 @@ public class Note implements HasName {
     //REQUIRES: file is a path to an existing file in the filesystem
     //EFFECTS: constructs a note with a given name of file, location of file, and incomplete status
     public Note(Path file) {
+        this(file, Status.INCOMPLETE);
+    }
+
+    //REQUIRES: file is a path to an existing file in the filesystem
+    //EFFECTS: constructs a note with a given name of file, location of file, and given status
+    public Note(Path file, Status status) {
         name = String.valueOf(file.getFileName());
         fileLocation = file;
-        status = Status.INCOMPLETE;
+        this.status = status;
     }
 
     //REQUIRES: statusNum = 1, 2, or 3
