@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class NoteTest {
     private Note testNote;
+    private Note testNote2;
     private Path testFilePath;
 
     @TempDir
@@ -26,6 +27,7 @@ class NoteTest {
         }
 
         testNote = new Note(testFilePath);
+        testNote2 = new Note(testFilePath, Status.NEED_REVISION);
     }
 
     @Test
@@ -33,6 +35,13 @@ class NoteTest {
         assertEquals("Vocabulary.txt", testNote.getName());
         assertEquals(testFilePath, testNote.getFileLocation());
         assertEquals(Status.INCOMPLETE, testNote.getStatus());
+    }
+
+    @Test
+    void testConstructorWithStatus() {
+        assertEquals("Vocabulary.txt", testNote2.getName());
+        assertEquals(testFilePath, testNote2.getFileLocation());
+        assertEquals(Status.NEED_REVISION, testNote2.getStatus());
     }
 
     @Test

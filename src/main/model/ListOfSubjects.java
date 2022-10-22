@@ -52,4 +52,8 @@ public class ListOfSubjects extends HasList implements Writable {
     public LinkedHashSet<Subject> getListOfSubjects() {
         return listOfSubjects;
     }
+
+    public int getLength() {
+        return listOfSubjects.size();
+    }
 }
