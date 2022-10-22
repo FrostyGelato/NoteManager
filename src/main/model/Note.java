@@ -40,6 +40,14 @@ public class Note implements HasName {
         }
     }
 
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("fileLocation", fileLocation);
+        json.put("status", status);
+        return json;
+    }
+
     public String getName() {
         return name;
     }
@@ -50,13 +58,5 @@ public class Note implements HasName {
 
     public Status getStatus() {
         return status;
-    }
-
-    public JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        json.put("name", name);
-        json.put("fileLocation", fileLocation);
-        json.put("status", status);
-        return json;
     }
 }

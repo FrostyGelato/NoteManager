@@ -50,14 +50,6 @@ public class Topic extends HasList implements HasName {
         return isDuplicate;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public LinkedHashSet<Note> getListOfNotes() {
-        return listOfNotes;
-    }
-
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);
@@ -73,5 +65,13 @@ public class Topic extends HasList implements HasName {
         }
 
         return jsonArray;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LinkedHashSet<Note> getListOfNotes() {
+        return listOfNotes;
     }
 }

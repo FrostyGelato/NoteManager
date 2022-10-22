@@ -2,13 +2,17 @@ package ui;
 
 import model.ListOfSubjects;
 import model.Subject;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
 import java.util.LinkedHashSet;
 
 // Displays the subject menu where user can view their subjects
 public class SubjectMenu extends Menu {
     TopicMenu topicMenu = new TopicMenu();
     private ListOfSubjects listOfSubjects;
+    private static final String JSON_STORE = "./data/subjectlist.json";
+    private JsonWriter jsonWriter;
 
     //MODIFIES: this
     //EFFECTS: allows for user input, sets up a list for subjects, and allows for handling of topics
@@ -35,6 +39,10 @@ public class SubjectMenu extends Menu {
             createNewSubject();
         } else if (userResponse.equals("r")) {
             removeSubject();
+        } else if (userResponse.equals("s")) {
+            save();
+        } else if (userResponse.equals("l")) {
+            load();
         } else {
             for (Subject s: listOfSubjects.getListOfSubjects()) {
                 if (userResponse.equals(s.getName())) {
@@ -84,7 +92,25 @@ public class SubjectMenu extends Menu {
 
     //EFFECTS: prints quit option
     protected void printExtraOptions() {
+
+        System.out.println("s -> save to file");
+        System.out.println("l -> load from file");
         System.out.println("q -> quit");
+    }
+
+    private void save() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(listOfSubjects);
+            jsonWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+        System.out.println("Data has been saved to file.");
+    }
+
+    private void load() {
+        System.out.println("Data has been loaded from file.");
     }
 
     //MODIFIES: this
@@ -93,5 +119,6 @@ public class SubjectMenu extends Menu {
         super.init();
         topicMenu = new TopicMenu();
         listOfSubjects = new ListOfSubjects();
+        jsonWriter = new JsonWriter(JSON_STORE);
     }
 }
