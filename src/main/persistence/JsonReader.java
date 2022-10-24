@@ -22,7 +22,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads a list of subjects from file and returns it;
     // throws IOException if an error occurs reading data from file
     public ListOfSubjects read() throws IOException {
         String jsonData = readFile(source);
@@ -41,7 +41,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses a list of subjects from JSON array and returns it
     private ListOfSubjects parseListOfSubjects(JSONArray listOfSubjectsInJson) {
         ListOfSubjects listFromJson = new ListOfSubjects();
 
@@ -53,8 +53,7 @@ public class JsonReader {
         return listFromJson;
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // EFFECTS: parses a subject from JSON object and returns it
     private Subject parseSubject(JSONObject subjectInJson) {
         String name = subjectInJson.getString("name");
         LinkedHashSet<Topic> listFromJson = parseListOfTopics(subjectInJson.getJSONArray("listOfTopics"));
@@ -65,6 +64,7 @@ public class JsonReader {
         return subject;
     }
 
+    // EFFECTS: parses a list of topics from JSON array and returns it
     private LinkedHashSet<Topic> parseListOfTopics(JSONArray listOfTopicsInJson) {
         LinkedHashSet<Topic> list = new LinkedHashSet<>();
 
@@ -76,6 +76,7 @@ public class JsonReader {
         return list;
     }
 
+    // EFFECTS: parses a topic from JSON object and returns it
     private Topic parseTopic(JSONObject topicInJson) {
         String name = topicInJson.getString("name");
         LinkedHashSet<Note> listFromJson = parseListOfNotes(topicInJson.getJSONArray("listOfNotes"));
@@ -86,6 +87,7 @@ public class JsonReader {
         return topic;
     }
 
+    // EFFECTS: parses a list of notes from JSON array and returns it
     private LinkedHashSet<Note> parseListOfNotes(JSONArray listOfNotesInJson) {
         LinkedHashSet<Note> list = new LinkedHashSet<>();
 
@@ -96,7 +98,7 @@ public class JsonReader {
         return list;
     }
 
-
+    // EFFECTS: parses a note from JSON object and returns it
     private Note parseNote(JSONObject noteInJson) {
         String name = noteInJson.getString("name");
         Path fileLocation = Paths.get(noteInJson.getString("fileLocation"));

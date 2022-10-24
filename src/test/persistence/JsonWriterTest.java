@@ -14,6 +14,7 @@ import java.util.LinkedHashSet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+//Based off of JsonSerializationDemo
 public class JsonWriterTest {
 
     private Note testNote;
@@ -76,12 +77,12 @@ public class JsonWriterTest {
             listOfSubjects.addSubject(biology);
 
 
-            JsonWriter writer = new JsonWriter("./data/testWriterEmptyList.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralList.json");
             writer.open();
             writer.write(listOfSubjects);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterEmptyList.json");
+            JsonReader reader = new JsonReader("./data/testWriterGeneralList.json");
             listOfSubjects = reader.read();
             assertEquals(2, listOfSubjects.getLength());
             LinkedHashSet<Subject> readSubjects = listOfSubjects.getListOfSubjects();
