@@ -51,21 +51,24 @@ public class SubjectMenu extends Menu {
             for (Subject s: listOfSubjects.getListOfSubjects()) {
                 if (userResponse.equals(s.getName())) {
 
-                    boolean keepGoing = true;
-                    String userResponseInTopicMenu;
-
-                    while (keepGoing) {
-                        topicMenu.displayTopicMenu(s);
-                        userResponseInTopicMenu = input.next().toLowerCase();
-
-                        if (userResponseInTopicMenu.equals("s")) {
-                            keepGoing = false;
-                        } else {
-                            topicMenu.processTopicMenuInput(s, userResponseInTopicMenu);
-                        }
-                    }
+                    processSelectedSubject(s);
                     break;
                 }
+            }
+        }
+    }
+
+    private void processSelectedSubject(Subject s) {
+        boolean keepGoing = true;
+
+        while (keepGoing) {
+            topicMenu.displayTopicMenu(s);
+            String userResponseInTopicMenu = input.next().toLowerCase();
+
+            if (userResponseInTopicMenu.equals("s")) {
+                keepGoing = false;
+            } else {
+                topicMenu.processTopicMenuInput(s, userResponseInTopicMenu);
             }
         }
     }
