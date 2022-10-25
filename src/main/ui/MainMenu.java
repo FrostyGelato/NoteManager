@@ -22,12 +22,14 @@ public class MainMenu {
         init();
 
         System.out.println("Notice: Commands need to be in lowercase, and names are case-sensitive.");
+        askToLoad();
 
         while (keepGoing) {
             subjectMenu.displaySubjectMenu();
             userResponse = input.next().toLowerCase();
 
             if (userResponse.equals("q")) {
+                checkToSave();
                 keepGoing = false;
             } else {
                 subjectMenu.processSubjectMenuInput(userResponse);
@@ -35,6 +37,27 @@ public class MainMenu {
         }
 
         System.out.println("The program has exited.");
+    }
+
+    //MODIFIES: this
+    //EFFECTS: save list of subjects to file based on user input
+    private void askToLoad() {
+        System.out.println("Would you like to load your notes collection?");
+        System.out.println("Press y to load; n to proceed without loading:");
+        String userResponse = input.next().toLowerCase();
+        if (userResponse.equals("y")) {
+            subjectMenu.load();
+        }
+    }
+
+    //EFFECTS: save list of subjects to file based on user input
+    private void checkToSave() {
+        System.out.println("Would you like to save your notes collection?");
+        System.out.println("Press y to save; n to discard changes:");
+        String userResponse = input.next().toLowerCase();
+        if (userResponse.equals("y")) {
+            subjectMenu.save();
+        }
     }
 
     //MODIFIES: this

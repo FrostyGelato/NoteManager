@@ -2,7 +2,6 @@ package ui;
 
 import model.ListOfSubjects;
 import model.Subject;
-import org.json.JSONObject;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -14,7 +13,7 @@ import java.util.LinkedHashSet;
 public class SubjectMenu extends Menu {
     TopicMenu topicMenu = new TopicMenu();
     private ListOfSubjects listOfSubjects;
-    private static final String JSON_STORE = "./data/subjectlist.json";
+    private static final String JSON_STORE = "./data/subjectList.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
@@ -105,7 +104,8 @@ public class SubjectMenu extends Menu {
         System.out.println("q -> quit");
     }
 
-    private void save() {
+    //EFFECTS: saves list of subjects to file
+    public void save() {
         try {
             jsonWriter.open();
             jsonWriter.write(listOfSubjects);
@@ -116,8 +116,9 @@ public class SubjectMenu extends Menu {
         System.out.println("Data has been saved to file.");
     }
 
-    private void load() {
-
+    //MODIFIES: this
+    //EFFECTS: loads list of subjects from file
+    public void load() {
         try {
             listOfSubjects = jsonReader.read();
             System.out.println("Data has been loaded from file.");
