@@ -11,13 +11,11 @@ import java.nio.file.Path;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 //Based off of JsonSerializationDemo
 public class JsonWriterTest {
 
-    private Note testNote;
     private Path testFilePath;
 
     @TempDir
@@ -87,10 +85,12 @@ public class JsonWriterTest {
             assertEquals(2, listOfSubjects.getLength());
             LinkedHashSet<Subject> readSubjects = listOfSubjects.getListOfSubjects();
             Iterator<Subject> subjectIter = readSubjects.iterator();
-            assertEquals("Physics", subjectIter.next().getName());
+            Subject readPhysics = subjectIter.next();
+            assertEquals("Physics", readPhysics.getName());
+            assertTrue(readPhysics.getListOfTopics().isEmpty());
             Subject readBiology = subjectIter.next();
             assertEquals("Biology", readBiology.getName());
-            LinkedHashSet<Topic> readTopics = biology.getListOfTopics();
+            LinkedHashSet<Topic> readTopics = readBiology.getListOfTopics();
             Iterator<Topic> topicIter = readTopics.iterator();
             Topic readEnzymes = topicIter.next();
             assertEquals("Enzymes", readEnzymes.getName());
