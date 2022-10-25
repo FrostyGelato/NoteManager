@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONArray;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -92,5 +93,26 @@ public class ListOfSubjectsTest {
         testList.addSubject("Physics");
         testList.addSubject("Biology");
         assertFalse(testList.containsDuplicateSubject("Math"));
+    }
+
+    @Test
+    void testToJsonEmpty() {
+        JSONArray testJsonArray = testList.toJson();
+        assertTrue(testJsonArray.isEmpty());
+    }
+
+    @Test
+    void testToJson() {
+        testList.addSubject("Math");
+        JSONArray testJsonArray = testList.toJson();
+        assertEquals(1, testJsonArray.length());
+    }
+
+    @Test
+    void testToJsonMultiple() {
+        testList.addSubject("Math");
+        testList.addSubject("Spanish");
+        JSONArray testJsonArray = testList.toJson();
+        assertEquals(2, testJsonArray.length());
     }
 }
