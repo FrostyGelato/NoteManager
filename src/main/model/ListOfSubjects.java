@@ -15,6 +15,9 @@ public class ListOfSubjects extends HasList implements Writable {
         listOfSubjects = new LinkedHashSet<>();
     }
 
+    //REQUIRES: list does not contain subject with same name as given subject
+    //MODIFIES: this
+    //EFFECTS: adds a subject to list
     public void addSubject(Subject subject) {
         listOfSubjects.add(subject);
     }

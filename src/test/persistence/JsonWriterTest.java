@@ -34,7 +34,6 @@ public class JsonWriterTest {
     @Test
     void testWriterInvalidFile() {
         try {
-            ListOfSubjects list = new ListOfSubjects();
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
             fail("IOException was expected");

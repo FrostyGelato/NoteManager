@@ -100,7 +100,6 @@ public class JsonReader {
 
     // EFFECTS: parses a note from JSON object and returns it
     private Note parseNote(JSONObject noteInJson) {
-        String name = noteInJson.getString("name");
         Path fileLocation = Paths.get(noteInJson.getString("fileLocation"));
         Status status = Status.valueOf(noteInJson.getString("status"));
         return new Note(fileLocation, status);

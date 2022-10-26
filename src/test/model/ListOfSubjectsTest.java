@@ -25,6 +25,31 @@ public class ListOfSubjectsTest {
 
     @Test
     void testAddSubject() {
+        Subject mathSubject = new Subject("Math");
+        testList.addSubject(mathSubject);
+
+        LinkedHashSet<Subject> actualList = testList.getListOfSubjects();
+        assertEquals(1, actualList.size());
+        Iterator<Subject> iter = actualList.iterator();
+        assertEquals("Math", iter.next().getName());
+    }
+
+    @Test
+    void testAddSubjectMultiple() {
+        Subject mathSubject = new Subject("Math");
+        Subject filmSubject = new Subject("Film");
+        testList.addSubject(mathSubject);
+        testList.addSubject(filmSubject);
+
+        LinkedHashSet<Subject> actualList = testList.getListOfSubjects();
+        assertEquals(2, actualList.size());
+        Iterator<Subject> iter = actualList.iterator();
+        assertEquals("Math", iter.next().getName());
+        assertEquals("Film", iter.next().getName());
+    }
+
+    @Test
+    void testAddSubjectString() {
         assertTrue(testList.getListOfSubjects().isEmpty());
         testList.addSubject("Math");
 
@@ -35,7 +60,7 @@ public class ListOfSubjectsTest {
     }
 
     @Test
-    void testAddSubjectMultiple() {
+    void testAddSubjectStringMultiple() {
         assertTrue(testList.getListOfSubjects().isEmpty());
         testList.addSubject("Math");
         testList.addSubject("English");
