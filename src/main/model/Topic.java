@@ -50,6 +50,7 @@ public class Topic extends HasList implements HasName {
         return isDuplicate;
     }
 
+    //EFFECTS: constructs a JsonObject from a topic and returns it
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);
@@ -57,6 +58,7 @@ public class Topic extends HasList implements HasName {
         return json;
     }
 
+    //EFFECTS: constructs a JsonArray from the list of notes and returns it
     private JSONArray notesToJson() {
         JSONArray jsonArray = new JSONArray();
 

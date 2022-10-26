@@ -39,6 +39,7 @@ public class ListOfSubjects extends HasList implements Writable {
         return isDuplicateName(name, listOfSubjects);
     }
 
+    //EFFECTS: constructs a JsonArray from a list of subjects and returns it
     @Override
     public JSONArray toJson() {
         JSONArray jsonArray = new JSONArray();

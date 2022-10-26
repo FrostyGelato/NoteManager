@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -135,5 +136,29 @@ public class SubjectTest {
         testSubject.addTopic("Logarithm");
         testSubject.addTopic("Exponent");
         assertFalse(testSubject.containsDuplicateTopic("Probability"));
+    }
+
+    @Test
+    void testToJsonEmpty() {
+        JSONObject testSubjectInJson = testSubject.toJson();
+        assertEquals("Math", testSubjectInJson.getString("name"));
+        assertEquals(0, testSubjectInJson.getJSONArray("listOfTopics").length());
+    }
+
+    @Test
+    void testToJson() {
+        testSubject.addTopic("Logarithm");
+        JSONObject testSubjectInJson = testSubject.toJson();
+        assertEquals("Math", testSubjectInJson.getString("name"));
+        assertEquals(1, testSubjectInJson.getJSONArray("listOfTopics").length());
+    }
+
+    @Test
+    void testToJsonMultiple() {
+        testSubject.addTopic("Logarithm");
+        testSubject.addTopic("Exponent");
+        JSONObject testSubjectInJson = testSubject.toJson();
+        assertEquals("Math", testSubjectInJson.getString("name"));
+        assertEquals(2, testSubjectInJson.getJSONArray("listOfTopics").length());
     }
 }

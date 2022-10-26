@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -142,5 +143,29 @@ public class TopicTest {
         testTopic.addNote(testNote1);
 
         assertFalse(testTopic.isDuplicatePath(testFile2Path));
+    }
+
+    @Test
+    void testToJsonEmpty() {
+        JSONObject testTopicInJson = testTopic.toJson();
+        assertEquals("Probability", testTopicInJson.getString("name"));
+        assertEquals(0, testTopicInJson.getJSONArray("listOfNotes").length());
+    }
+
+    @Test
+    void testToJson() {
+        testTopic.addNote(testFile1Path);
+        JSONObject testTopicInJson = testTopic.toJson();
+        assertEquals("Probability", testTopicInJson.getString("name"));
+        assertEquals(1, testTopicInJson.getJSONArray("listOfNotes").length());
+    }
+
+    @Test
+    void testToJsonMultiple() {
+        testTopic.addNote(testFile1Path);
+        testTopic.addNote(testFile2Path);
+        JSONObject testTopicInJson = testTopic.toJson();
+        assertEquals("Probability", testTopicInJson.getString("name"));
+        assertEquals(2, testTopicInJson.getJSONArray("listOfNotes").length());
     }
 }

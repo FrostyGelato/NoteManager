@@ -43,6 +43,7 @@ public class Subject extends HasList implements HasName {
         return isDuplicateName(name, listOfTopics);
     }
 
+    //EFFECTS: constructs a JsonObject from a subject and returns it
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);
@@ -50,6 +51,7 @@ public class Subject extends HasList implements HasName {
         return json;
     }
 
+    //EFFECTS: constructs a JsonArray from the list of topics and returns it
     private JSONArray topicsToJson() {
         JSONArray jsonArray = new JSONArray();
 

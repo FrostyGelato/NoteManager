@@ -1,11 +1,13 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -60,5 +62,14 @@ class NoteTest {
     void testSetStatusNoChange() {
         testNote.setStatus(1);
         assertEquals(Status.INCOMPLETE, testNote.getStatus());
+    }
+
+    @Test
+    void testToJson() {
+        JSONObject testNoteInJson = testNote.toJson();
+
+        assertEquals("Vocabulary.txt", testNoteInJson.getString("name"));
+        assertEquals(testFilePath, testNoteInJson.get("fileLocation"));
+        assertEquals(Status.INCOMPLETE, testNoteInJson.get("status"));
     }
 }

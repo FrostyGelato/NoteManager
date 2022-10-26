@@ -46,6 +46,7 @@ public class Note implements HasName {
         }
     }
 
+    //EFFECTS: constructs a JsonObject from a note and returns it
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);
