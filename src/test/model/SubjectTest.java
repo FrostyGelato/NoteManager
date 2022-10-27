@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -150,7 +151,9 @@ public class SubjectTest {
         testSubject.addTopic("Logarithm");
         JSONObject testSubjectInJson = testSubject.toJson();
         assertEquals("Math", testSubjectInJson.getString("name"));
-        assertEquals(1, testSubjectInJson.getJSONArray("listOfTopics").length());
+        JSONArray testTopicListInJson = testSubjectInJson.getJSONArray("listOfTopics");
+        assertEquals(1, testTopicListInJson.length());
+        assertEquals("Logarithm", testTopicListInJson.getJSONObject(0).getString("name"));
     }
 
     @Test
@@ -159,6 +162,9 @@ public class SubjectTest {
         testSubject.addTopic("Exponent");
         JSONObject testSubjectInJson = testSubject.toJson();
         assertEquals("Math", testSubjectInJson.getString("name"));
-        assertEquals(2, testSubjectInJson.getJSONArray("listOfTopics").length());
+        JSONArray testTopicListInJson = testSubjectInJson.getJSONArray("listOfTopics");
+        assertEquals(2, testTopicListInJson.length());
+        assertEquals("Logarithm", testTopicListInJson.getJSONObject(0).getString("name"));
+        assertEquals("Exponent", testTopicListInJson.getJSONObject(1).getString("name"));
     }
 }

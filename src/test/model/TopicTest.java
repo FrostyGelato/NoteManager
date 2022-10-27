@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -157,7 +158,9 @@ public class TopicTest {
         testTopic.addNote(testFile1Path);
         JSONObject testTopicInJson = testTopic.toJson();
         assertEquals("Probability", testTopicInJson.getString("name"));
-        assertEquals(1, testTopicInJson.getJSONArray("listOfNotes").length());
+        JSONArray testNoteListInJson = testTopicInJson.getJSONArray("listOfNotes");
+        assertEquals(1, testNoteListInJson.length());
+        assertEquals(testFile1Path, testNoteListInJson.getJSONObject(0).get("fileLocation"));
     }
 
     @Test
@@ -166,6 +169,9 @@ public class TopicTest {
         testTopic.addNote(testFile2Path);
         JSONObject testTopicInJson = testTopic.toJson();
         assertEquals("Probability", testTopicInJson.getString("name"));
-        assertEquals(2, testTopicInJson.getJSONArray("listOfNotes").length());
+        JSONArray testNoteListInJson = testTopicInJson.getJSONArray("listOfNotes");
+        assertEquals(2, testNoteListInJson.length());
+        assertEquals(testFile1Path, testNoteListInJson.getJSONObject(0).get("fileLocation"));
+        assertEquals(testFile2Path, testNoteListInJson.getJSONObject(1).get("fileLocation"));
     }
 }

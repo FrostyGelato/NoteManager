@@ -131,6 +131,7 @@ public class ListOfSubjectsTest {
         testList.addSubject("Math");
         JSONArray testJsonArray = testList.toJson();
         assertEquals(1, testJsonArray.length());
+        assertEquals("Math", testJsonArray.getJSONObject(0).getString("name"));
     }
 
     @Test
@@ -139,5 +140,7 @@ public class ListOfSubjectsTest {
         testList.addSubject("Spanish");
         JSONArray testJsonArray = testList.toJson();
         assertEquals(2, testJsonArray.length());
+        assertEquals("Math", testJsonArray.getJSONObject(0).getString("name"));
+        assertEquals("Spanish", testJsonArray.getJSONObject(1).getString("name"));
     }
 }
