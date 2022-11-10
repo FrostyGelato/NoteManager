@@ -62,7 +62,7 @@ public class TopicMenu extends Menu {
     //EFFECTS: creates a new topic based on user input
     private void createNewTopic(Subject selectedSubject) {
         System.out.println("Enter name for topic and click Enter:");
-        String topicName = input.next();
+        String topicName = input.next().toLowerCase();
 
         if (selectedSubject.containsDuplicateTopic(topicName)) {
             System.out.println("Error: You cannot have topics with the same name.\n"

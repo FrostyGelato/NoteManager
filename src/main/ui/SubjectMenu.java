@@ -77,7 +77,7 @@ public class SubjectMenu extends Menu {
     //EFFECTS: asks user for subject name and creates subject with given name in list
     private void createNewSubject() {
         System.out.println("Enter name for subject and click Enter:");
-        String subjectName = input.next();
+        String subjectName = input.next().toLowerCase();
 
         if (listOfSubjects.containsDuplicateSubject(subjectName)) {
             System.out.println("Error: You cannot have subjects with the same name.\n"
