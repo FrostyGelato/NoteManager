@@ -53,6 +53,7 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
         removeBtn = new JButton("Remove");
         openBtn = new JButton("Open");
         handleRemoveBtn();
+        handleOpenBtn();
 
         toolBarPane.add(saveBtn);
         toolBarPane.add(loadBtn);
@@ -110,6 +111,8 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
     protected abstract void handleAddBtn();
 
     protected abstract void handleRemoveBtn();
+
+    protected abstract void handleOpenBtn();
 
     protected abstract void loadList();
 

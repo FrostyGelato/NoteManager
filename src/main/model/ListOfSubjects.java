@@ -42,6 +42,19 @@ public class ListOfSubjects extends HasList implements Writable {
         return isDuplicateName(name, listOfSubjects);
     }
 
+    public Subject getSubjectByName(String name) {
+
+        Subject namedSubject = new Subject("temp");
+
+        for (Subject s: listOfSubjects) {
+            if (name.equals(s.getName())) {
+                namedSubject = s;
+            }
+        }
+
+        return namedSubject;
+    }
+
     //EFFECTS: constructs a JsonArray from a list of subjects and returns it
     @Override
     public JSONArray toJson() {

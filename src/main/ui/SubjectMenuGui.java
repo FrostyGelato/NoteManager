@@ -28,6 +28,12 @@ public class SubjectMenuGui extends MenuGui {
     }
 
     @Override
+    protected void handleOpenBtn() {
+        OpenListener openListener = new OpenListener();
+        openBtn.addActionListener(openListener);
+    }
+
+    @Override
     protected void loadList() {
         for (Subject s: listOfSubjects.getListOfSubjects()) {
             listModel.addElement(s.getName());
@@ -70,6 +76,16 @@ public class SubjectMenuGui extends MenuGui {
             String nameToBeRemoved = (String) listModel.get(index);
             listOfSubjects.removeSubject(nameToBeRemoved);
             listModel.remove(index);
+        }
+    }
+
+    class OpenListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int index = list.getSelectedIndex();
+            String selectedSubjectName = (String) listModel.get(index);
+            TopicMenuGui topicMenu = new TopicMenuGui(listOfSubjects.getSubjectByName(selectedSubjectName));
         }
     }
 }
