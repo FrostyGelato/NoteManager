@@ -6,15 +6,24 @@ import model.Topic;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class TopicMenuGui extends MenuGui {
 
     Subject selectedSubject;
 
-    public TopicMenuGui(Subject subject) {
+    public TopicMenuGui(SubjectMenuGui parent, Subject subject) {
         super("Topic Menu for " + subject.getName(), "topic");
         selectedSubject = subject;
         loadList();
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                parent.setEnabled(true);
+            }
+        });
+
     }
 
     @Override
@@ -86,6 +95,7 @@ public class TopicMenuGui extends MenuGui {
             String nameToBeRemoved = (String) listModel.get(index);
             selectedSubject.removeTopic(nameToBeRemoved);
             listModel.remove(index);
+            removeBtn.setEnabled(false);
         }
     }
 
@@ -95,7 +105,8 @@ public class TopicMenuGui extends MenuGui {
         public void actionPerformed(ActionEvent e) {
             int index = list.getSelectedIndex();
             String selectedTopicName = (String) listModel.get(index);
-            NoteMenuGui noteMenu = new NoteMenuGui(selectedSubject.getTopicByName(selectedTopicName));
+            NoteMenuGui noteMenu = new NoteMenuGui(TopicMenuGui.this,
+                    selectedSubject.getTopicByName(selectedTopicName));
         }
     }
 }

@@ -59,6 +59,7 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
         handleSaveBtn();
         handleLoadBtn();
         handleRemoveBtn();
+        removeBtn.setEnabled(false);
         handleOpenBtn();
 
         toolBarPane.add(saveBtn);
@@ -83,6 +84,18 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
 
         JScrollPane listScrollPane = new JScrollPane(list);
 
+        list.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting() == false) {
+                    if (list.getSelectedIndex() == -1) {
+                        removeBtn.setEnabled(false);
+                    } else {
+                        removeBtn.setEnabled(true);
+                    }
+                }
+            }
+        });
+
         mainPanel.add(listScrollPane, BorderLayout.CENTER);
     }
 
@@ -104,6 +117,8 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
         mainPanel.add(bottomBarPane, BorderLayout.PAGE_END);
     }
 
+    //MODIFIES: this
+    //EFFECTS: enables or disables remove button when value of selection changes
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting() == false) {

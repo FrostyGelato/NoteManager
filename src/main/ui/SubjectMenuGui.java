@@ -150,6 +150,7 @@ public class SubjectMenuGui extends MenuGui {
             String nameToBeRemoved = (String) listModel.get(index);
             listOfSubjects.removeSubject(nameToBeRemoved);
             listModel.remove(index);
+            removeBtn.setEnabled(false);
         }
     }
 
@@ -159,7 +160,9 @@ public class SubjectMenuGui extends MenuGui {
         public void actionPerformed(ActionEvent e) {
             int index = list.getSelectedIndex();
             String selectedSubjectName = (String) listModel.get(index);
-            TopicMenuGui topicMenu = new TopicMenuGui(listOfSubjects.getSubjectByName(selectedSubjectName));
+            SubjectMenuGui.this.setEnabled(false);
+            TopicMenuGui topicMenu = new TopicMenuGui(SubjectMenuGui.this,
+                    listOfSubjects.getSubjectByName(selectedSubjectName));
         }
     }
 

@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-public class NoteMenuGui extends JFrame {
+public class NoteMenuGui extends JDialog {
 
     Topic selectedTopic;
     private JList<Note> list;
@@ -25,8 +25,8 @@ public class NoteMenuGui extends JFrame {
     private JButton openBtn;
     private JFileChooser fc;
 
-    public NoteMenuGui(Topic topic) {
-        super("Note Menu for " + topic.getName());
+    public NoteMenuGui(TopicMenuGui parent, Topic topic) {
+        super(parent, "Note Menu for " + topic.getName(), ModalityType.APPLICATION_MODAL);
         selectedTopic = topic;
 
         setPreferredSize(new Dimension(600, 600));
