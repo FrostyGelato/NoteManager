@@ -42,6 +42,8 @@ public class ListOfSubjects extends HasList implements Writable {
         return isDuplicateName(name, listOfSubjects);
     }
 
+    //REQUIRES: list contains a subject with given name
+    //EFFECTS: returns the subject with the given name
     public Subject getSubjectByName(String name) {
 
         Subject namedSubject = new Subject("temp");

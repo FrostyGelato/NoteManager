@@ -43,6 +43,22 @@ public class Subject extends HasList implements HasName {
         return isDuplicateName(name, listOfTopics);
     }
 
+    //REQUIRES: list contains a topic with given name
+    //EFFECTS: returns the topic with the given name
+    public Topic getTopicByName(String name) {
+
+        Topic namedTopic = new Topic("temp");
+
+        for (Topic t: listOfTopics) {
+            if (name.equals(t.getName())) {
+                namedTopic = t;
+                break;
+            }
+        }
+
+        return namedTopic;
+    }
+
     //EFFECTS: constructs a JsonObject from a subject and returns it
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

@@ -1,7 +1,9 @@
 package ui;
 
 import model.Subject;
+import model.Topic;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,8 +12,9 @@ public class TopicMenuGui extends MenuGui {
     Subject selectedSubject;
 
     public TopicMenuGui(Subject subject) {
-        super("Topic Menu", "topic");
+        super("Topic Menu for " + subject.getName(), "topic");
         selectedSubject = subject;
+        loadList();
     }
 
     @Override
@@ -28,12 +31,27 @@ public class TopicMenuGui extends MenuGui {
 
     @Override
     protected void handleOpenBtn() {
+        OpenListener openListener = new OpenListener();
+        openBtn.addActionListener(openListener);
+    }
+
+    @Override
+    protected void handleSaveBtn() {
+
+    }
+
+    @Override
+    protected void handleLoadBtn() {
 
     }
 
     @Override
     protected void loadList() {
-
+        if (selectedSubject != null) {
+            for (Topic t : selectedSubject.getListOfTopics()) {
+                listModel.addElement(t.getName());
+            }
+        }
     }
 
     @Override
@@ -45,18 +63,18 @@ public class TopicMenuGui extends MenuGui {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String name = subjectName.getText();
-/*
-            if (name.equals("") || listOfSubjects.containsDuplicateSubject(name)) {
-                Toolkit.getDefaultToolkit().beep();
-                subjectName.requestFocusInWindow();
-                subjectName.selectAll();
-                return;
-            }*/
+            String name = nameField.getText();
 
-            //listOfSubjects.addSubject(name);
+            if (name.equals("") || selectedSubject.containsDuplicateTopic(name)) {
+                Toolkit.getDefaultToolkit().beep();
+                nameField.requestFocusInWindow();
+                nameField.selectAll();
+                return;
+            }
+
+            selectedSubject.addTopic(name);
             listModel.addElement(name);
-            subjectName.setText("");
+            nameField.setText("");
         }
     }
 
@@ -66,8 +84,18 @@ public class TopicMenuGui extends MenuGui {
         public void actionPerformed(ActionEvent e) {
             int index = list.getSelectedIndex();
             String nameToBeRemoved = (String) listModel.get(index);
-            //listOfSubjects.removeSubject(nameToBeRemoved);
+            selectedSubject.removeTopic(nameToBeRemoved);
             listModel.remove(index);
+        }
+    }
+
+    class OpenListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int index = list.getSelectedIndex();
+            String selectedTopicName = (String) listModel.get(index);
+            NoteMenuGui noteMenu = new NoteMenuGui(selectedSubject.getTopicByName(selectedTopicName));
         }
     }
 }

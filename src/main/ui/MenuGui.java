@@ -20,12 +20,15 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
     protected JButton addBtn;
     protected JButton removeBtn;
     protected JButton openBtn;
-    protected JTextField subjectName;
+    protected JTextField nameField;
 
     protected MenuGui(String title, String itemName) {
         super(title);
 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        if (itemName.equals("subject")) {
+            setDefaultCloseOperation(EXIT_ON_CLOSE);
+        }
+
         setPreferredSize(new Dimension(600, 600));
 
         mainPanel = new JPanel();
@@ -52,6 +55,8 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
         loadBtn = new JButton("Load");
         removeBtn = new JButton("Remove");
         openBtn = new JButton("Open");
+        handleSaveBtn();
+        handleLoadBtn();
         handleRemoveBtn();
         handleOpenBtn();
 
@@ -82,13 +87,13 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
         bottomBarPane.setBorder(new EmptyBorder(2, 2, 2, 2));
         bottomBarPane.setLayout(new FlowLayout());
 
-        JLabel forSubjectName = new JLabel("Enter " + itemName + " name:");
-        subjectName = new JTextField(10);
+        JLabel nameFieldLabel = new JLabel("Enter " + itemName + " name:");
+        nameField = new JTextField(10);
         addBtn = new JButton("Add");
         handleAddBtn();
 
-        bottomBarPane.add(forSubjectName);
-        bottomBarPane.add(subjectName);
+        bottomBarPane.add(nameFieldLabel);
+        bottomBarPane.add(nameField);
         bottomBarPane.add(addBtn);
         mainPanel.add(bottomBarPane, BorderLayout.PAGE_END);
     }
@@ -107,6 +112,10 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
             }
         }
     }
+
+    protected abstract void handleSaveBtn();
+
+    protected abstract void handleLoadBtn();
 
     protected abstract void handleAddBtn();
 
