@@ -38,6 +38,8 @@ public class Topic extends HasList implements HasName {
         listOfNotes.removeIf(note -> note.getFileLocation().toString().equals(filePath));
     }
 
+    //MODIFIES: this
+    //EFFECTS: if the given note is in list of notes, removes it; otherwise, do nothing
     public void removeNote(Note note) {
         listOfNotes.remove(note);
     }

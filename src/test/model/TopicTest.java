@@ -98,7 +98,7 @@ public class TopicTest {
     }
 
     @Test
-    void testRemoveNote() {
+    void testRemoveNoteString() {
         Note testNote = new Note(testFile1Path);
         testTopic.addNote(testNote);
         assertTrue(testTopic.getListOfNotes().contains(testNote));
@@ -110,7 +110,7 @@ public class TopicTest {
     }
 
     @Test
-    void testRemoveNoteMultiple() {
+    void testRemoveNoteStringMultiple() {
         Note testNote1 = new Note(testFile1Path);
         testTopic.addNote(testNote1);
         Note testNote2 = new Note(testFile2Path);
@@ -126,6 +126,47 @@ public class TopicTest {
         assertEquals(1, noteList.size());
 
         testTopic.removeNote(testFile2Path.toString());
+        assertFalse(testTopic.getListOfNotes().contains(testNote2));
+        assertEquals(0, noteList.size());
+    }
+
+    @Test
+    void testRemoveNote() {
+        Note testNote = new Note(testFile1Path);
+        testTopic.addNote(testNote);
+        assertTrue(testTopic.getListOfNotes().contains(testNote));
+
+        testTopic.removeNote(testNote);
+        assertFalse(testTopic.getListOfNotes().contains(testNote));
+    }
+
+    @Test
+    void testRemoveNoteNotPresent() {
+        Note testNote1 = new Note(testFile1Path);
+        testTopic.addNote(testNote1);
+        assertTrue(testTopic.getListOfNotes().contains(testNote1));
+
+        Note testNote2 = new Note(testFile1Path);
+        testTopic.removeNote(testNote2);
+        assertTrue(testTopic.getListOfNotes().contains(testNote1));
+    }
+
+    @Test
+    void testRemoveNoteMultiple() {
+        Note testNote = new Note(testFile1Path);
+        Note testNote2 = new Note(testFile1Path);
+        testTopic.addNote(testNote);
+        testTopic.addNote(testNote2);
+        assertTrue(testTopic.getListOfNotes().contains(testNote));
+        assertTrue(testTopic.getListOfNotes().contains(testNote2));
+
+        testTopic.removeNote(testNote);
+        LinkedHashSet<Note> noteList = testTopic.getListOfNotes();
+        assertFalse(noteList.contains(testNote));
+        assertTrue(noteList.contains(testNote2));
+        assertEquals(1, noteList.size());
+
+        testTopic.removeNote(testNote2);
         assertFalse(testTopic.getListOfNotes().contains(testNote2));
         assertEquals(0, noteList.size());
     }

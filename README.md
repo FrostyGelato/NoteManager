@@ -19,8 +19,8 @@ My project will be a notes management application. **It will keep track of notes
 - As a user, when I start the application, I want to be given the option to load my lists of subjects, topics, and notes from file.
 
 # Instructions for Grader
-- You can generate the first required event related to adding Xs to a Y by...
-- You can generate the second required event related to adding Xs to a Y by...
+- You can generate the first required event related to adding Xs to a Y by entering the name in the bottom text field and clicking Add
+- You can generate the second required event related to adding Xs to a Y by selecting an element in the list and clicking Remove
 - You can locate my visual component by looking at the Restore Data dialog that pops up on launch
 - You can save the state of my application by clicking the x button at the top of the Subject Menu window and clicking Yes
 - You can reload the state of my application by clicking Yes in the Restore Data dialog on launch
