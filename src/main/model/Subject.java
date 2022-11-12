@@ -52,7 +52,6 @@ public class Subject extends HasList implements HasName {
         for (Topic t: listOfTopics) {
             if (name.equals(t.getName())) {
                 namedTopic = t;
-                break;
             }
         }
 
