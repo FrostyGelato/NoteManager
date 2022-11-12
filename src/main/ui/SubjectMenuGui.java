@@ -39,9 +39,10 @@ public class SubjectMenuGui extends MenuGui {
             }
         });
 
+        final ImageIcon icon = new ImageIcon("./data/load.png");
         int load = JOptionPane.showConfirmDialog(this,
-                "Would you like to load data?", "Restore Data",
-                JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+                "Would you like to load data from file?", "Restore Data",
+                JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
 
         if (load == JOptionPane.YES_OPTION) {
             load();
