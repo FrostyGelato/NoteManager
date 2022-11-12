@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+// A menu window that displays a list of notes
 public class NoteMenuGui extends JDialog {
 
     Topic selectedTopic;
@@ -25,6 +26,7 @@ public class NoteMenuGui extends JDialog {
     private JButton openBtn;
     private JFileChooser fc;
 
+    //EFFECTS: constructs a menu window
     public NoteMenuGui(TopicMenuGui parent, Topic topic) {
         super(parent, "Note Menu for " + topic.getName(), ModalityType.APPLICATION_MODAL);
         selectedTopic = topic;
@@ -44,6 +46,8 @@ public class NoteMenuGui extends JDialog {
         setResizable(false);
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs the set of buttons at the top
     private void initializeToolBar() {
         toolBarPane = new JPanel();
         toolBarPane.setBorder(new EmptyBorder(2, 2, 2, 2));
@@ -68,6 +72,8 @@ public class NoteMenuGui extends JDialog {
         mainPanel.add(toolBarPane, BorderLayout.PAGE_START);
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs the list
     private void initializeList() {
         listModel = new DefaultListModel();
 
@@ -84,14 +90,19 @@ public class NoteMenuGui extends JDialog {
         mainPanel.add(listScrollPane, BorderLayout.CENTER);
     }
 
+    //MODIFIES: this
+    //EFFECTS: add items to list
     private void loadList() {
         for (Note n: selectedTopic.getListOfNotes()) {
             listModel.addElement(n);
         }
     }
 
+    // Handles event where user clicks on add button
     class AddListener implements ActionListener {
 
+        //MODIFIES: NoteMenuGui.this
+        //EFFECTS: adds new note
         @Override
         public void actionPerformed(ActionEvent e) {
             // Taken from FileChooserDemo
@@ -108,8 +119,11 @@ public class NoteMenuGui extends JDialog {
         }
     }
 
+    // Handles event where user clicks on change button
     class ChangeListener implements ActionListener {
 
+        //MODIFIES: NoteMenuGui.this
+        //EFFECTS: change the status of the selected note
         @Override
         public void actionPerformed(ActionEvent e) {
             int index = list.getSelectedIndex();
@@ -122,8 +136,11 @@ public class NoteMenuGui extends JDialog {
         }
     }
 
+    // Handles event where user clicks on remove button
     class RemoveListener implements ActionListener {
 
+        //MODIFIES: NoteMenuGui.this
+        //EFFECTS: remove selected note from list
         @Override
         public void actionPerformed(ActionEvent e) {
             int index = list.getSelectedIndex();

@@ -61,6 +61,7 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
         handleRemoveBtn();
         removeBtn.setEnabled(false);
         handleOpenBtn();
+        openBtn.setEnabled(false);
 
         toolBarPane.add(saveBtn);
         toolBarPane.add(loadBtn);
@@ -89,8 +90,10 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
                 if (e.getValueIsAdjusting() == false) {
                     if (list.getSelectedIndex() == -1) {
                         removeBtn.setEnabled(false);
+                        openBtn.setEnabled(false);
                     } else {
                         removeBtn.setEnabled(true);
+                        openBtn.setEnabled(true);
                     }
                 }
             }

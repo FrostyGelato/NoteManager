@@ -14,6 +14,7 @@ import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+// A menu window that displays a list of subjects
 public class SubjectMenuGui extends MenuGui {
 
     private ListOfSubjects listOfSubjects;
@@ -21,6 +22,7 @@ public class SubjectMenuGui extends MenuGui {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
+    //EFFECTS: constructs a menu window
     public SubjectMenuGui() {
         super("Subject Menu", "subject");
 
@@ -49,36 +51,48 @@ public class SubjectMenuGui extends MenuGui {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: set behaviour of add button
     @Override
     protected void handleAddBtn() {
         AddListener addListener = new AddListener();
         addBtn.addActionListener(addListener);
     }
 
+    //MODIFIES: this
+    //EFFECTS: set behaviour of remove button
     @Override
     protected void handleRemoveBtn() {
         RemoveListener removeListener = new RemoveListener();
         removeBtn.addActionListener(removeListener);
     }
 
+    //MODIFIES: this
+    //EFFECTS: set behaviour of open button
     @Override
     protected void handleOpenBtn() {
         OpenListener openListener = new OpenListener();
         openBtn.addActionListener(openListener);
     }
 
+    //MODIFIES: this
+    //EFFECTS: set behaviour of save button
     @Override
     protected void handleSaveBtn() {
         SaveListener saveListener = new SaveListener();
         saveBtn.addActionListener(saveListener);
     }
 
+    //MODIFIES: this
+    //EFFECTS: set behaviour of load button
     @Override
     protected void handleLoadBtn() {
         LoadListener loadListener = new LoadListener();
         loadBtn.addActionListener(loadListener);
     }
 
+    //MODIFIES: this
+    //EFFECTS: add items to list
     @Override
     protected void loadList() {
         for (Subject s: listOfSubjects.getListOfSubjects()) {
@@ -86,6 +100,8 @@ public class SubjectMenuGui extends MenuGui {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: initialize other fields
     @Override
     protected void init() {
         listOfSubjects = new ListOfSubjects();
@@ -94,6 +110,7 @@ public class SubjectMenuGui extends MenuGui {
         jsonReader = new JsonReader(JSON_STORE);
     }
 
+    //EFFECTS: saves list of subjects to file
     private void save() {
         try {
             jsonWriter.open();
@@ -108,6 +125,8 @@ public class SubjectMenuGui extends MenuGui {
                 //"Data has been saved to file.", "Annoying Message", JOptionPane.PLAIN_MESSAGE);
     }
 
+    //MODIFIES: this
+    //EFFECTS: loads list of subjects from file
     private void load() {
         try {
             listOfSubjects = jsonReader.read();
@@ -123,8 +142,11 @@ public class SubjectMenuGui extends MenuGui {
         loadList();
     }
 
+    // Handles event where user clicks on add button
     class AddListener implements ActionListener {
 
+        //MODIFIES: SubjectMenuGui.this
+        //EFFECTS: add a subject with given name to list
         @Override
         public void actionPerformed(ActionEvent e) {
             String name = nameField.getText();
@@ -142,8 +164,11 @@ public class SubjectMenuGui extends MenuGui {
         }
     }
 
+    // Handles event where user clicks on remove button
     class RemoveListener implements ActionListener {
 
+        //MODIFIES: SubjectMenuGui.this
+        //EFFECTS: remove selected subject from list
         @Override
         public void actionPerformed(ActionEvent e) {
             int index = list.getSelectedIndex();
@@ -151,11 +176,14 @@ public class SubjectMenuGui extends MenuGui {
             listOfSubjects.removeSubject(nameToBeRemoved);
             listModel.remove(index);
             removeBtn.setEnabled(false);
+            openBtn.setEnabled(false);
         }
     }
 
+    // Handles event where user clicks on open button
     class OpenListener implements ActionListener {
 
+        //EFFECTS: launches the topic menu window for selected subject
         @Override
         public void actionPerformed(ActionEvent e) {
             int index = list.getSelectedIndex();
@@ -166,16 +194,21 @@ public class SubjectMenuGui extends MenuGui {
         }
     }
 
+    // Handles event where user clicks on save button
     class SaveListener implements ActionListener {
 
+        //EFFECTS: saves list of subjects to file
         @Override
         public void actionPerformed(ActionEvent e) {
             save();
         }
     }
 
+    // Handles event where user clicks on load button
     class LoadListener implements ActionListener {
 
+        //MODIFIES: SubjectMenuGui.this
+        //EFFECTS: loads list of subjects from file
         @Override
         public void actionPerformed(ActionEvent e) {
             load();
