@@ -45,6 +45,8 @@ public class Note implements HasName {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: changes status to given status
     public void setStatus(Status status) {
         this.status = status;
     }

@@ -6,6 +6,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 
+// A generic menu window that displays a list of items
 public abstract class MenuGui extends JFrame implements ListSelectionListener {
 
     protected JPanel mainPanel;
@@ -22,6 +23,8 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
     protected JButton openBtn;
     protected JTextField nameField;
 
+    //REQUIRES: title and itemName are non-empty strings
+    //EFFECTS: constructs a menu window
     protected MenuGui(String title, String itemName) {
         super(title);
 
@@ -42,6 +45,8 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
         setResizable(false);
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs the set of buttons at the top
     protected void initializeToolBar() {
         toolBarPane = new JPanel();
         toolBarPane.setBorder(new EmptyBorder(2, 2, 2, 2));
@@ -63,6 +68,8 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
         mainPanel.add(toolBarPane, BorderLayout.PAGE_START);
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs the list
     protected void initializeList() {
         listModel = new DefaultListModel();
 
@@ -79,6 +86,8 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
         mainPanel.add(listScrollPane, BorderLayout.CENTER);
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs the elements for adding an item
     protected void initalizeBottomBar(String itemName) {
         bottomBarPane = new JPanel();
         bottomBarPane.setBorder(new EmptyBorder(2, 2, 2, 2));
@@ -100,27 +109,39 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
         if (e.getValueIsAdjusting() == false) {
 
             if (list.getSelectedIndex() == -1) {
-                //No selection, disable fire button.
                 removeBtn.setEnabled(false);
 
             } else {
-                //Selection, enable the fire button.
                 removeBtn.setEnabled(true);
             }
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: set behaviour of save button
     protected abstract void handleSaveBtn();
 
+    //MODIFIES: this
+    //EFFECTS: set behaviour of load button
     protected abstract void handleLoadBtn();
 
+    //MODIFIES: this
+    //EFFECTS: set behaviour of add button
     protected abstract void handleAddBtn();
 
+    //MODIFIES: this
+    //EFFECTS: set behaviour of remove button
     protected abstract void handleRemoveBtn();
 
+    //MODIFIES: this
+    //EFFECTS: set behaviour of open button
     protected abstract void handleOpenBtn();
 
+    //MODIFIES: this
+    //EFFECTS: add items to list
     protected abstract void loadList();
 
+    //MODIFIES: this
+    //EFFECTS: sets up other fields
     protected abstract void init();
 }

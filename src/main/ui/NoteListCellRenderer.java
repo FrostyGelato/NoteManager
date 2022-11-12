@@ -5,12 +5,15 @@ import model.Note;
 import javax.swing.*;
 import java.awt.*;
 
+// Represents a cell for a note in a list
 public class NoteListCellRenderer extends JPanel implements ListCellRenderer<Note> {
 
     private JLabel fileNameLabel;
     private JLabel statusLabel;
     private JLabel pathLabel;
 
+    //MODIFIES: this
+    //EFFECTS: constructs the cell
     public NoteListCellRenderer() {
         super(new FlowLayout(FlowLayout.LEADING, 15, 5));
         fileNameLabel = new JLabel();
@@ -23,6 +26,8 @@ public class NoteListCellRenderer extends JPanel implements ListCellRenderer<Not
         setOpaque(true);
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets value of labels based on fields in note and returns cell
     @Override
     public Component getListCellRendererComponent(JList list, Note note,
                                                   int index, boolean isSelected, boolean cellHasFocus) {

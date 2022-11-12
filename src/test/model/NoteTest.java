@@ -47,21 +47,27 @@ class NoteTest {
     }
 
     @Test
-    void testSetStatusChangeToRevision() {
+    void testSetStatusIntChangeToRevision() {
         testNote.setStatus(2);
         assertEquals(Status.NEED_REVISION, testNote.getStatus());
     }
 
     @Test
-    void testSetStatusChangeToComplete() {
+    void testSetStatusIntChangeToComplete() {
         testNote.setStatus(3);
         assertEquals(Status.COMPLETE, testNote.getStatus());
     }
 
     @Test
-    void testSetStatusNoChange() {
+    void testSetStatusIntNoChange() {
         testNote.setStatus(1);
         assertEquals(Status.INCOMPLETE, testNote.getStatus());
+    }
+
+    @Test
+    void testSetStatusChangeToRevision() {
+        testNote.setStatus(Status.NEED_REVISION);
+        assertEquals(Status.NEED_REVISION, testNote.getStatus());
     }
 
     @Test
