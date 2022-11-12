@@ -25,10 +25,6 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
     protected MenuGui(String title, String itemName) {
         super(title);
 
-        if (itemName.equals("subject")) {
-            setDefaultCloseOperation(EXIT_ON_CLOSE);
-        }
-
         setPreferredSize(new Dimension(600, 600));
 
         mainPanel = new JPanel();

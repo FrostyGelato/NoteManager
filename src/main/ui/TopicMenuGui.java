@@ -37,12 +37,12 @@ public class TopicMenuGui extends MenuGui {
 
     @Override
     protected void handleSaveBtn() {
-
+        saveBtn.setEnabled(false);
     }
 
     @Override
     protected void handleLoadBtn() {
-
+        loadBtn.setEnabled(false);
     }
 
     @Override
