@@ -45,6 +45,10 @@ public class Note implements HasName {
         }
     }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     //EFFECTS: constructs a JsonObject from a note and returns it
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

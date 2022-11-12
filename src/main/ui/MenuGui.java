@@ -72,6 +72,7 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(-1);
+        list.setSelectionBackground(Color.LIGHT_GRAY);
 
         JScrollPane listScrollPane = new JScrollPane(list);
 
