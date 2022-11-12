@@ -121,6 +121,23 @@ public class ListOfSubjectsTest {
     }
 
     @Test
+    void testGetSubjectByNameFirst() {
+        Subject subject1 = new Subject("Math");
+        testList.addSubject(subject1);
+        testList.addSubject("Biology");
+        assertEquals(subject1, testList.getSubjectByName("Math"));
+    }
+
+    @Test
+    void testGetSubjectByNameSecond() {
+        Subject subject1 = new Subject("Math");
+        testList.addSubject(subject1);
+        Subject subject2 = new Subject("Biology");
+        testList.addSubject(subject2);
+        assertEquals(subject2, testList.getSubjectByName("Biology"));
+    }
+
+    @Test
     void testToJsonEmpty() {
         JSONArray testJsonArray = testList.toJson();
         assertTrue(testJsonArray.isEmpty());

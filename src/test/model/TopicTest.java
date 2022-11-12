@@ -157,11 +157,11 @@ public class TopicTest {
         Note testNote2 = new Note(testFile1Path);
         testTopic.addNote(testNote);
         testTopic.addNote(testNote2);
-        assertTrue(testTopic.getListOfNotes().contains(testNote));
-        assertTrue(testTopic.getListOfNotes().contains(testNote2));
+        LinkedHashSet<Note> noteList = testTopic.getListOfNotes();
+        assertTrue(noteList.contains(testNote));
+        assertTrue(noteList.contains(testNote2));
 
         testTopic.removeNote(testNote);
-        LinkedHashSet<Note> noteList = testTopic.getListOfNotes();
         assertFalse(noteList.contains(testNote));
         assertTrue(noteList.contains(testNote2));
         assertEquals(1, noteList.size());

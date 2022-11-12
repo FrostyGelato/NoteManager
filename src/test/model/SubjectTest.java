@@ -140,6 +140,22 @@ public class SubjectTest {
     }
 
     @Test
+    void testGetTopicByNameFirst() {
+        Topic logarithmTopic = new Topic("Logarithm");
+        testSubject.addTopic(logarithmTopic);
+        testSubject.addTopic("Exponent");
+        assertEquals(logarithmTopic, testSubject.getTopicByName("Logarithm"));
+    }
+
+    @Test
+    void testGetTopicByNameSecond() {
+        testSubject.addTopic("Logarithm");
+        Topic exponentTopic = new Topic("Exponent");
+        testSubject.addTopic(exponentTopic);
+        assertEquals(exponentTopic, testSubject.getTopicByName("Exponent"));
+    }
+
+    @Test
     void testToJsonEmpty() {
         JSONObject testSubjectInJson = testSubject.toJson();
         assertEquals("Math", testSubjectInJson.getString("name"));
