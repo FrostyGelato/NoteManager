@@ -6,10 +6,13 @@ import model.Topic;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 // A menu window that displays a list of notes
 public class NoteMenuGui extends JDialog {
@@ -62,8 +65,13 @@ public class NoteMenuGui extends JDialog {
         addBtn.addActionListener(addListener);
         ChangeListener changeListener = new ChangeListener();
         changeBtn.addActionListener(changeListener);
+        changeBtn.setEnabled(false);
         RemoveListener removeListener = new RemoveListener();
         removeBtn.addActionListener(removeListener);
+        removeBtn.setEnabled(false);
+        OpenListener openListener = new OpenListener();
+        openBtn.addActionListener(openListener);
+        openBtn.setEnabled(false);
 
         toolBarPane.add(addBtn);
         toolBarPane.add(changeBtn);
@@ -86,6 +94,18 @@ public class NoteMenuGui extends JDialog {
         list.setVisibleRowCount(-1);
 
         JScrollPane listScrollPane = new JScrollPane(list);
+
+        list.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting() == false) {
+                    if (list.getSelectedIndex() == -1) {
+                        disableButtons(false);
+                    } else {
+                        disableButtons(true);
+                    }
+                }
+            }
+        });
 
         mainPanel.add(listScrollPane, BorderLayout.CENTER);
     }
@@ -133,6 +153,7 @@ public class NoteMenuGui extends JDialog {
             selectedNote.setStatus(s);
             listModel.clear();
             loadList();
+            disableButtons(false);
         }
     }
 
@@ -147,6 +168,33 @@ public class NoteMenuGui extends JDialog {
             Note noteToBeRemoved = (Note) listModel.get(index);
             selectedTopic.removeNote(noteToBeRemoved);
             listModel.remove(index);
+            disableButtons(false);
         }
+    }
+
+    // Handles event where user clicks on open button
+    class OpenListener implements ActionListener {
+
+        //MODIFIES: NoteMenuGui.this
+        //EFFECTS: opens selected note
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int index = list.getSelectedIndex();
+            Note selectedNote = (Note) listModel.get(index);
+            try {
+                Desktop desktop = Desktop.getDesktop();
+                desktop.open(selectedNote.getFileLocation().toFile());
+            } catch (IOException ex) {
+                System.out.println("Error: Unable to open file");
+            }
+        }
+    }
+
+    //MODIFIES: this
+    //EFFECTS: If b is true, enables remove, change, and open buttons; otherwise, disables them
+    private void disableButtons(boolean b) {
+        removeBtn.setEnabled(b);
+        changeBtn.setEnabled(b);
+        openBtn.setEnabled(b);
     }
 }
