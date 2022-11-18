@@ -71,7 +71,7 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
     }
 
     //MODIFIES: this
-    //EFFECTS: constructs the list
+    //EFFECTS: constructs a list
     protected void initializeList() {
         listModel = new DefaultListModel();
 
@@ -103,7 +103,7 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
     }
 
     //MODIFIES: this
-    //EFFECTS: constructs the elements for adding an item
+    //EFFECTS: constructs the ui elements for adding an item
     protected void initalizeBottomBar(String itemName) {
         bottomBarPane = new JPanel();
         bottomBarPane.setBorder(new EmptyBorder(2, 2, 2, 2));

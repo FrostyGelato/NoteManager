@@ -147,6 +147,7 @@ public class SubjectMenuGui extends MenuGui {
 
         //MODIFIES: SubjectMenuGui.this
         //EFFECTS: add a subject with given name to list
+        //Taken from ListDemoProject
         @Override
         public void actionPerformed(ActionEvent e) {
             String name = nameField.getText();
