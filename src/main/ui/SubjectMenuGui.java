@@ -27,6 +27,7 @@ public class SubjectMenuGui extends MenuGui {
         super("Subject Menu", "subject");
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //Based off stackoverflow.com/questions/16295942/java-swing-adding-action-listener-for-exit-on-close
         addWindowListener(new WindowAdapter() {
 
             public void windowClosing(WindowEvent e) {
@@ -147,7 +148,7 @@ public class SubjectMenuGui extends MenuGui {
 
         //MODIFIES: SubjectMenuGui.this
         //EFFECTS: add a subject with given name to list
-        //Taken from ListDemoProject
+        //Based off ListDemoProject
         @Override
         public void actionPerformed(ActionEvent e) {
             String name = nameField.getText();

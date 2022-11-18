@@ -85,6 +85,7 @@ public abstract class MenuGui extends JFrame implements ListSelectionListener {
 
         JScrollPane listScrollPane = new JScrollPane(list);
 
+        //Based off stackoverflow.com/questions/20048108/disabling-a-button-when-a-list-item-isnt-selected-in-java
         list.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting() == false) {

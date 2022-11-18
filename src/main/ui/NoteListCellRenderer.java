@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 // Represents a cell for a note in a list
+// Based off stackoverflow.com/questions/63597631/is-there-a-list-gui-component-in-java-8-swing
 public class NoteListCellRenderer extends JPanel implements ListCellRenderer<Note> {
 
     private JLabel fileNameLabel;
