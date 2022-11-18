@@ -42,6 +42,7 @@ public class SubjectMenuGui extends MenuGui {
             }
         });
 
+        //Taken from https://thenounproject.com/icon/data-loading-4998583/
         final ImageIcon icon = new ImageIcon("./data/load.png");
         int load = JOptionPane.showConfirmDialog(this,
                 "Would you like to load data from file?", "Restore Data",
