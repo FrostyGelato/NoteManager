@@ -65,13 +65,11 @@ public class NoteMenuGui extends JDialog {
         addBtn.addActionListener(addListener);
         ChangeListener changeListener = new ChangeListener();
         changeBtn.addActionListener(changeListener);
-        changeBtn.setEnabled(false);
         RemoveListener removeListener = new RemoveListener();
         removeBtn.addActionListener(removeListener);
-        removeBtn.setEnabled(false);
         OpenListener openListener = new OpenListener();
         openBtn.addActionListener(openListener);
-        openBtn.setEnabled(false);
+        enableButtons(false);
 
         toolBarPane.add(addBtn);
         toolBarPane.add(changeBtn);
@@ -99,9 +97,9 @@ public class NoteMenuGui extends JDialog {
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting() == false) {
                     if (list.getSelectedIndex() == -1) {
-                        disableButtons(false);
+                        enableButtons(false);
                     } else {
-                        disableButtons(true);
+                        enableButtons(true);
                     }
                 }
             }
@@ -153,7 +151,7 @@ public class NoteMenuGui extends JDialog {
             selectedNote.setStatus(s);
             listModel.clear();
             loadList();
-            disableButtons(false);
+            enableButtons(false);
         }
     }
 
@@ -168,7 +166,7 @@ public class NoteMenuGui extends JDialog {
             Note noteToBeRemoved = (Note) listModel.get(index);
             selectedTopic.removeNote(noteToBeRemoved);
             listModel.remove(index);
-            disableButtons(false);
+            enableButtons(false);
         }
     }
 
@@ -184,15 +182,17 @@ public class NoteMenuGui extends JDialog {
             try {
                 Desktop desktop = Desktop.getDesktop();
                 desktop.open(selectedNote.getFileLocation().toFile());
-            } catch (IOException ex) {
-                System.out.println("Error: Unable to open file");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(NoteMenuGui.this,
+                        "Unable to open file",
+                        "Open Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
     //MODIFIES: this
     //EFFECTS: If b is true, enables remove, change, and open buttons; otherwise, disables them
-    private void disableButtons(boolean b) {
+    private void enableButtons(boolean b) {
         removeBtn.setEnabled(b);
         changeBtn.setEnabled(b);
         openBtn.setEnabled(b);
