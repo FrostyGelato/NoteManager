@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.ListOfSubjects;
 import model.Subject;
 import persistence.JsonReader;
@@ -39,6 +41,7 @@ public class SubjectMenuGui extends MenuGui {
                     save();
                     dispose();
                 }
+                printLog();
             }
         });
 
@@ -142,6 +145,14 @@ public class SubjectMenuGui extends MenuGui {
 
         listModel.clear();
         loadList();
+    }
+
+    //EFFECTS: Prints log to console
+    private void printLog() {
+        System.out.println("Event log:");
+        for (Event e: EventLog.getInstance()) {
+            System.out.println(e.toString() + "\n");
+        }
     }
 
     // Handles event where user clicks on add button

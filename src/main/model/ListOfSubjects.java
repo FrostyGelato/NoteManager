@@ -20,6 +20,9 @@ public class ListOfSubjects extends HasList implements Writable {
     //EFFECTS: adds a subject to list
     public void addSubject(Subject subject) {
         listOfSubjects.add(subject);
+
+        EventLog.getInstance().logEvent(
+                new Event("Subject " + subject.getName() + " added to list of subjects."));
     }
 
     //REQUIRES: name is non-empty string, list does not contain subject with same name as given name
@@ -34,6 +37,9 @@ public class ListOfSubjects extends HasList implements Writable {
     //EFFECTS: removes any subject with same name as given name from list
     public void removeSubject(String name) {
         listOfSubjects.removeIf(subject -> subject.getName().equals(name));
+
+        EventLog.getInstance().logEvent(
+                new Event("Subject " + name + " has been removed from list of subjects."));
     }
 
     //REQUIRES: subjectName is non-empty
