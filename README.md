@@ -24,3 +24,25 @@ My project will be a notes management application. **It will keep track of notes
 - You can locate my visual component by looking at the Restore Data dialog that pops up on launch
 - You can save the state of my application by clicking the x button at the top of the Subject Menu window and clicking Yes
 - You can reload the state of my application by clicking Yes in the Restore Data dialog on launch
+
+# Phase 4: Task 2
+Wed Nov 23 09:30:38 PST 2022  
+Subject Biology added to list of subjects.
+
+Wed Nov 23 09:30:48 PST 2022  
+Subject History added to list of subjects.
+
+Wed Nov 23 09:31:10 PST 2022  
+Subject Geography added to list of subjects.
+
+Wed Nov 23 09:31:15 PST 2022  
+Subject Biology has been removed from list of subjects.
+
+Wed Nov 23 09:31:28 PST 2022  
+Topic Causes of WWIII added to subject History
+
+Wed Nov 23 09:31:50 PST 2022  
+Topic Apocalypse added to subject History
+
+Wed Nov 23 09:31:52 PST 2022  
+Topic Apocalypse has been removed from subject History

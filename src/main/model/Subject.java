@@ -21,6 +21,9 @@ public class Subject extends HasList implements HasName {
     //EFFECTS: adds the given topic to list of topics unless it's already there, in which case do nothing
     public void addTopic(Topic topic) {
         listOfTopics.add(topic);
+
+        EventLog.getInstance().logEvent(
+                new Event("Topic " + topic.getName() + " added to subject " + name));
     }
 
     //REQUIRES: topicName is non-empty string, there is no topic with same name in list
@@ -35,6 +38,9 @@ public class Subject extends HasList implements HasName {
     //EFFECTS: remove topic with given name from list of topics
     public void removeTopic(String topicName) {
         listOfTopics.removeIf(topic -> topic.getName().equals(topicName));
+
+        EventLog.getInstance().logEvent(
+                new Event("Topic " + topicName + " has been removed from subject " + name));
     }
 
     //REQUIRES: name is non-empty
