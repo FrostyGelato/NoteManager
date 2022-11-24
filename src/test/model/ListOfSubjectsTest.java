@@ -12,10 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ListOfSubjectsTest {
 
     private ListOfSubjects testList;
+    private Iterator<Event> eventIter;
 
     @BeforeEach
     void setup() {
         testList = new ListOfSubjects();
+
+        EventLog.getInstance().clear();
     }
 
     @Test
@@ -32,6 +35,8 @@ public class ListOfSubjectsTest {
         assertEquals(1, actualList.size());
         Iterator<Subject> iter = actualList.iterator();
         assertEquals("Math", iter.next().getName());
+        initialiseIterator();
+        assertEquals("Subject Math added to list of subjects.", eventIter.next().getDescription());
     }
 
     @Test
@@ -46,6 +51,9 @@ public class ListOfSubjectsTest {
         Iterator<Subject> iter = actualList.iterator();
         assertEquals("Math", iter.next().getName());
         assertEquals("Film", iter.next().getName());
+        initialiseIterator();
+        assertEquals("Subject Math added to list of subjects.", eventIter.next().getDescription());
+        assertEquals("Subject Film added to list of subjects.", eventIter.next().getDescription());
     }
 
     @Test
@@ -57,6 +65,8 @@ public class ListOfSubjectsTest {
         assertEquals(1, actualList.size());
         Iterator<Subject> iter = actualList.iterator();
         assertEquals("Math", iter.next().getName());
+        initialiseIterator();
+        assertEquals("Subject Math added to list of subjects.", eventIter.next().getDescription());
     }
 
     @Test
@@ -70,6 +80,9 @@ public class ListOfSubjectsTest {
         Iterator<Subject> iter = actualList.iterator();
         assertEquals("Math", iter.next().getName());
         assertEquals("English", iter.next().getName());
+        initialiseIterator();
+        assertEquals("Subject Math added to list of subjects.", eventIter.next().getDescription());
+        assertEquals("Subject English added to list of subjects.", eventIter.next().getDescription());
     }
 
     @Test
@@ -83,6 +96,10 @@ public class ListOfSubjectsTest {
 
         testList.removeSubject("Math");
         assertTrue(testList.getListOfSubjects().isEmpty());
+        initialiseIterator();
+        assertEquals("Subject Math added to list of subjects.", eventIter.next().getDescription());
+        assertEquals("Subject Math has been removed from list of subjects.",
+                eventIter.next().getDescription());
     }
 
     @Test
@@ -99,6 +116,13 @@ public class ListOfSubjectsTest {
         testList.removeSubject("Math");
         testList.removeSubject("English");
         assertTrue(testList.getListOfSubjects().isEmpty());
+        initialiseIterator();
+        assertEquals("Subject Math added to list of subjects.", eventIter.next().getDescription());
+        assertEquals("Subject English added to list of subjects.", eventIter.next().getDescription());
+        assertEquals("Subject Math has been removed from list of subjects.",
+                eventIter.next().getDescription());
+        assertEquals("Subject English has been removed from list of subjects.",
+                eventIter.next().getDescription());
     }
 
     @Test
@@ -159,5 +183,10 @@ public class ListOfSubjectsTest {
         assertEquals(2, testJsonArray.length());
         assertEquals("Math", testJsonArray.getJSONObject(0).getString("name"));
         assertEquals("Spanish", testJsonArray.getJSONObject(1).getString("name"));
+    }
+
+    private void initialiseIterator() {
+        eventIter = EventLog.getInstance().iterator();
+        eventIter.next();
     }
 }
