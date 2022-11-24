@@ -12,10 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class SubjectTest {
     private Subject testSubject;
+    private Iterator<Event> eventIter;
 
     @BeforeEach
     void setup() {
         testSubject = new Subject("Math");
+
+        EventLog.getInstance().clear();
     }
 
     @Test
@@ -32,6 +35,8 @@ public class SubjectTest {
         LinkedHashSet<Topic> topicList = testSubject.getListOfTopics();
         assertTrue(topicList.contains(testTopic));
         assertEquals(1, topicList.size());
+        initialiseIterator();
+        assertEquals("Topic Logarithm added to subject Math.", eventIter.next().getDescription());
     }
 
     @Test
@@ -50,6 +55,9 @@ public class SubjectTest {
         assertTrue(topicList.contains(testExpTopic));
         assertTrue(topicList.contains(testLogTopic));
         assertEquals(2, topicList.size());
+        initialiseIterator();
+        assertEquals("Topic Logarithm added to subject Math.", eventIter.next().getDescription());
+        assertEquals("Topic Exponent added to subject Math.", eventIter.next().getDescription());
     }
 
     @Test
@@ -66,6 +74,8 @@ public class SubjectTest {
         topicList = testSubject.getListOfTopics();
         assertTrue(topicList.contains(testTopic));
         assertEquals(1, topicList.size());
+        initialiseIterator();
+        assertEquals("Topic Logarithm added to subject Math.", eventIter.next().getDescription());
     }
 
     @Test
@@ -76,6 +86,8 @@ public class SubjectTest {
         Iterator<Topic> iter = topicList.iterator();
         assertEquals("Logarithm", iter.next().getName());
         assertEquals(1, topicList.size());
+        initialiseIterator();
+        assertEquals("Topic Logarithm added to subject Math.", eventIter.next().getDescription());
     }
 
     @Test
@@ -88,6 +100,9 @@ public class SubjectTest {
         assertEquals("Logarithm", iter.next().getName());
         assertEquals("Exponent", iter.next().getName());
         assertEquals(2, topicList.size());
+        initialiseIterator();
+        assertEquals("Topic Logarithm added to subject Math.", eventIter.next().getDescription());
+        assertEquals("Topic Exponent added to subject Math.", eventIter.next().getDescription());
     }
 
     @Test
@@ -100,6 +115,9 @@ public class SubjectTest {
         LinkedHashSet<Topic> topicList = testSubject.getListOfTopics();
         assertFalse(topicList.contains(testTopic));
         assertEquals(0, topicList.size());
+        initialiseIterator();
+        assertEquals("Topic Logarithm added to subject Math.", eventIter.next().getDescription());
+        assertEquals("Topic Logarithm has been removed from subject Math.", eventIter.next().getDescription());
     }
 
     @Test
@@ -118,6 +136,12 @@ public class SubjectTest {
         topicList = testSubject.getListOfTopics();
         assertFalse(topicList.contains(testTopic));
         assertEquals(0, topicList.size());
+
+        initialiseIterator();
+        assertEquals("Topic Logarithm added to subject Math.", eventIter.next().getDescription());
+        assertEquals("Topic Exponent added to subject Math.", eventIter.next().getDescription());
+        assertEquals("Topic Exponent has been removed from subject Math.", eventIter.next().getDescription());
+        assertEquals("Topic Logarithm has been removed from subject Math.", eventIter.next().getDescription());
     }
 
     @Test
@@ -182,5 +206,10 @@ public class SubjectTest {
         assertEquals(2, testTopicListInJson.length());
         assertEquals("Logarithm", testTopicListInJson.getJSONObject(0).getString("name"));
         assertEquals("Exponent", testTopicListInJson.getJSONObject(1).getString("name"));
+    }
+
+    private void initialiseIterator() {
+        eventIter = EventLog.getInstance().iterator();
+        eventIter.next();
     }
 }

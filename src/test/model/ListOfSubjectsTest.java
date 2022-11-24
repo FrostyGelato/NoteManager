@@ -10,7 +10,6 @@ import java.util.LinkedHashSet;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ListOfSubjectsTest {
-
     private ListOfSubjects testList;
     private Iterator<Event> eventIter;
 

@@ -23,7 +23,7 @@ public class Subject extends HasList implements HasName {
         listOfTopics.add(topic);
 
         EventLog.getInstance().logEvent(
-                new Event("Topic " + topic.getName() + " added to subject " + name));
+                new Event("Topic " + topic.getName() + " added to subject " + name + "."));
     }
 
     //REQUIRES: topicName is non-empty string, there is no topic with same name in list
@@ -40,7 +40,7 @@ public class Subject extends HasList implements HasName {
         listOfTopics.removeIf(topic -> topic.getName().equals(topicName));
 
         EventLog.getInstance().logEvent(
-                new Event("Topic " + topicName + " has been removed from subject " + name));
+                new Event("Topic " + topicName + " has been removed from subject " + name + "."));
     }
 
     //REQUIRES: name is non-empty
