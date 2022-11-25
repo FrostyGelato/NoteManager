@@ -46,3 +46,9 @@ Topic Apocalypse added to subject History
 
 Wed Nov 23 09:31:52 PST 2022  
 Topic Apocalypse has been removed from subject History
+
+# Phase 4: Task 3
+- I would change the LinkedHashSet in ListOfSubjects, Subject, and Topic to LinkedHashMap. The key would be the name of the element as a String and the value would be the element. This way, retrieving or removing a specific element would be much easier.
+- I might use generics to implement the Subject and Topic classes since they are basically identical in functionality.
+- I would create an abstract class that MenuGui and NoteMenuGui would extend since they share some behaviour, especially in the constructors.
+- I would refractor some methods in the gui classes to use helper methods. For instance, initializeToolBar() in MenuGui handles a bunch of tasks that can be extracted into their own methods.
