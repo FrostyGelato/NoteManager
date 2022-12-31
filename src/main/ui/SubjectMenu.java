@@ -7,6 +7,7 @@ import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 
 // Displays the subject menu where user can view their subjects
@@ -25,7 +26,7 @@ public class SubjectMenu extends Menu {
 
     //EFFECTS: displays a list of subjects and other options
     void displaySubjectMenu() {
-        LinkedHashSet<Subject> subjectList = listOfSubjects.getListOfSubjects();
+        LinkedHashMap<String, Subject> subjectList = listOfSubjects.getListOfSubjects();
 
         System.out.println("Subject Menu\n");
         System.out.println("Subject List:");

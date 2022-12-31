@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import persistence.Writable;
 
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 
 // Represents a list of subjects
 public class ListOfSubjects extends HasList implements Writable {
