@@ -1,5 +1,3 @@
-# My CPSC 210 Project
-
 ## Proposal
 My project will be a notes management application. **It will keep track of notes scattered across a filesystem and provide easy access to notes related to a certain topic.** The application will link to the note files but will not store the actual files. The notes will be grouped by topics, which in turn are grouped by subject. A note file can be present under more than one topic, and a topic can contain multiple note files.
 
@@ -18,14 +16,14 @@ My project will be a notes management application. **It will keep track of notes
 - As a user, when I select the quit option from the application menu, I want to be reminded to save my lists of subjects, topics, and notes to file and have the option to do so or not.
 - As a user, when I start the application, I want to be given the option to load my lists of subjects, topics, and notes from file.
 
-# Instructions for Grader
+# Instructions
 - You can generate the first required event related to adding Xs to a Y by entering the name of a subject in the bottom text field of the Subject Menu window and clicking the Add button
 - You can generate the second required event related to adding Xs to a Y by selecting an element in the list in the Subject Menu window and clicking the Remove button
 - You can locate my visual component by looking at the Restore Data dialog that pops up on launch
 - You can save the state of my application by clicking the x button at the top of the Subject Menu window and clicking Yes
 - You can reload the state of my application by clicking Yes in the Restore Data dialog on launch
 
-# Phase 4: Task 2
+# Sample Log
 Wed Nov 23 09:30:38 PST 2022  
 Subject Biology added to list of subjects.
 
@@ -47,7 +45,7 @@ Topic Apocalypse added to subject History
 Wed Nov 23 09:31:52 PST 2022  
 Topic Apocalypse has been removed from subject History
 
-# Phase 4: Task 3
+# Potential Future Improvements
 - I would change the LinkedHashSet in ListOfSubjects, Subject, and Topic to LinkedHashMap. The key would be the name of the element as a String and the value would be the element. This way, retrieving or removing a specific element would be much easier.
 - I might use generics to implement the Subject and Topic classes since they are basically identical in functionality.
 - I would create an abstract class that MenuGui and NoteMenuGui would extend since they share some behaviour, especially in the constructors.
