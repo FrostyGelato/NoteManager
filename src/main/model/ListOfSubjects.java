@@ -3,23 +3,24 @@ package model;
 import org.json.JSONArray;
 import persistence.Writable;
 
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 
 // Represents a list of subjects
 public class ListOfSubjects extends HasList implements Writable {
 
-    private LinkedHashSet<Subject> listOfSubjects;
+    private LinkedHashMap<String, Subject> listOfSubjects;
 
     //EFFECTS: constructs an empty list of subjects
     public ListOfSubjects() {
-        listOfSubjects = new LinkedHashSet<>();
+        listOfSubjects = new LinkedHashMap<>();
     }
 
     //REQUIRES: list does not contain subject with same name as given subject
     //MODIFIES: this
     //EFFECTS: adds a subject to list
     public void addSubject(Subject subject) {
-        listOfSubjects.add(subject);
+        listOfSubjects.put(subject.getName(), subject);
 
         EventLog.getInstance().logEvent(
                 new Event("Subject " + subject.getName() + " added to list of subjects."));
@@ -36,7 +37,7 @@ public class ListOfSubjects extends HasList implements Writable {
     //MODIFIES: this
     //EFFECTS: removes any subject with same name as given name from list
     public void removeSubject(String name) {
-        listOfSubjects.removeIf(subject -> subject.getName().equals(name));
+        listOfSubjects.remove(name);
 
         EventLog.getInstance().logEvent(
                 new Event("Subject " + name + " has been removed from list of subjects."));
@@ -45,22 +46,14 @@ public class ListOfSubjects extends HasList implements Writable {
     //REQUIRES: subjectName is non-empty
     //EFFECTS: return true if list already contains a subject with same name; otherwise return false
     public boolean containsDuplicateSubject(String name) {
-        return isDuplicateName(name, listOfSubjects);
+        return listOfSubjects.containsKey(name);
     }
 
     //REQUIRES: list contains a subject with given name
     //EFFECTS: returns the subject with the given name
     public Subject getSubjectByName(String name) {
 
-        Subject namedSubject = new Subject("temp");
-
-        for (Subject s: listOfSubjects) {
-            if (name.equals(s.getName())) {
-                namedSubject = s;
-            }
-        }
-
-        return namedSubject;
+        return listOfSubjects.get(name);
     }
 
     //EFFECTS: constructs a JsonArray from a list of subjects and returns it
@@ -68,13 +61,13 @@ public class ListOfSubjects extends HasList implements Writable {
     public JSONArray toJson() {
         JSONArray jsonArray = new JSONArray();
 
-        for (Subject s : listOfSubjects) {
+        for (Subject s : listOfSubjects.values()) {
             jsonArray.put(s.toJson());
         }
         return jsonArray;
     }
 
-    public LinkedHashSet<Subject> getListOfSubjects() {
+    public LinkedHashMap<String, Subject> getListOfSubjects() {
         return listOfSubjects;
     }
 

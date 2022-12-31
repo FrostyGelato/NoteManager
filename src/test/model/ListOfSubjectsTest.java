@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,9 +31,9 @@ public class ListOfSubjectsTest {
         Subject mathSubject = new Subject("Math");
         testList.addSubject(mathSubject);
 
-        LinkedHashSet<Subject> actualList = testList.getListOfSubjects();
+        LinkedHashMap<String, Subject> actualList = testList.getListOfSubjects();
         assertEquals(1, actualList.size());
-        Iterator<Subject> iter = actualList.iterator();
+        Iterator<Subject> iter = actualList.values().iterator();
         assertEquals("Math", iter.next().getName());
         initialiseIterator();
         assertEquals("Subject Math added to list of subjects.", eventIter.next().getDescription());
@@ -45,9 +46,9 @@ public class ListOfSubjectsTest {
         testList.addSubject(mathSubject);
         testList.addSubject(filmSubject);
 
-        LinkedHashSet<Subject> actualList = testList.getListOfSubjects();
+        LinkedHashMap<String, Subject> actualList = testList.getListOfSubjects();
         assertEquals(2, actualList.size());
-        Iterator<Subject> iter = actualList.iterator();
+        Iterator<Subject> iter = actualList.values().iterator();
         assertEquals("Math", iter.next().getName());
         assertEquals("Film", iter.next().getName());
         initialiseIterator();
@@ -60,9 +61,9 @@ public class ListOfSubjectsTest {
         assertTrue(testList.getListOfSubjects().isEmpty());
         testList.addSubject("Math");
 
-        LinkedHashSet<Subject> actualList = testList.getListOfSubjects();
+        LinkedHashMap<String, Subject> actualList = testList.getListOfSubjects();
         assertEquals(1, actualList.size());
-        Iterator<Subject> iter = actualList.iterator();
+        Iterator<Subject> iter = actualList.values().iterator();
         assertEquals("Math", iter.next().getName());
         initialiseIterator();
         assertEquals("Subject Math added to list of subjects.", eventIter.next().getDescription());
@@ -74,9 +75,9 @@ public class ListOfSubjectsTest {
         testList.addSubject("Math");
         testList.addSubject("English");
 
-        LinkedHashSet<Subject> actualList = testList.getListOfSubjects();
+        LinkedHashMap<String, Subject> actualList = testList.getListOfSubjects();
         assertEquals(2, actualList.size());
-        Iterator<Subject> iter = actualList.iterator();
+        Iterator<Subject> iter = actualList.values().iterator();
         assertEquals("Math", iter.next().getName());
         assertEquals("English", iter.next().getName());
         initialiseIterator();
@@ -88,9 +89,9 @@ public class ListOfSubjectsTest {
     void testRemoveSubject() {
         testList.addSubject("Math");
 
-        LinkedHashSet<Subject> actualList = testList.getListOfSubjects();
+        LinkedHashMap<String, Subject> actualList = testList.getListOfSubjects();
         assertEquals(1, actualList.size());
-        Iterator<Subject> iter = actualList.iterator();
+        Iterator<Subject> iter = actualList.values().iterator();
         assertEquals("Math", iter.next().getName());
 
         testList.removeSubject("Math");
@@ -106,9 +107,9 @@ public class ListOfSubjectsTest {
         testList.addSubject("Math");
         testList.addSubject("English");
 
-        LinkedHashSet<Subject> actualList = testList.getListOfSubjects();
+        LinkedHashMap<String, Subject> actualList = testList.getListOfSubjects();
         assertEquals(2, actualList.size());
-        Iterator<Subject> iter = actualList.iterator();
+        Iterator<Subject> iter = actualList.values().iterator();
         assertEquals("Math", iter.next().getName());
         assertEquals("English", iter.next().getName());
 
