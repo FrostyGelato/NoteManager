@@ -31,7 +31,7 @@ public class ListOfSubjectsTest {
         Subject mathSubject = new Subject("Math");
         testList.addSubject(mathSubject);
 
-        LinkedHashMap<String, Subject> actualList = testList.getListOfSubjects();
+        LinkedHashMap<String, Subject> actualList = testList.getMapOfSubjects();
         assertEquals(1, actualList.size());
         Iterator<Subject> iter = actualList.values().iterator();
         assertEquals("Math", iter.next().getName());
@@ -46,7 +46,7 @@ public class ListOfSubjectsTest {
         testList.addSubject(mathSubject);
         testList.addSubject(filmSubject);
 
-        LinkedHashMap<String, Subject> actualList = testList.getListOfSubjects();
+        LinkedHashMap<String, Subject> actualList = testList.getMapOfSubjects();
         assertEquals(2, actualList.size());
         Iterator<Subject> iter = actualList.values().iterator();
         assertEquals("Math", iter.next().getName());
@@ -61,7 +61,7 @@ public class ListOfSubjectsTest {
         assertTrue(testList.getListOfSubjects().isEmpty());
         testList.addSubject("Math");
 
-        LinkedHashMap<String, Subject> actualList = testList.getListOfSubjects();
+        LinkedHashMap<String, Subject> actualList = testList.getMapOfSubjects();
         assertEquals(1, actualList.size());
         Iterator<Subject> iter = actualList.values().iterator();
         assertEquals("Math", iter.next().getName());
@@ -75,7 +75,7 @@ public class ListOfSubjectsTest {
         testList.addSubject("Math");
         testList.addSubject("English");
 
-        LinkedHashMap<String, Subject> actualList = testList.getListOfSubjects();
+        LinkedHashMap<String, Subject> actualList = testList.getMapOfSubjects();
         assertEquals(2, actualList.size());
         Iterator<Subject> iter = actualList.values().iterator();
         assertEquals("Math", iter.next().getName());
@@ -89,7 +89,7 @@ public class ListOfSubjectsTest {
     void testRemoveSubject() {
         testList.addSubject("Math");
 
-        LinkedHashMap<String, Subject> actualList = testList.getListOfSubjects();
+        LinkedHashMap<String, Subject> actualList = testList.getMapOfSubjects();
         assertEquals(1, actualList.size());
         Iterator<Subject> iter = actualList.values().iterator();
         assertEquals("Math", iter.next().getName());
@@ -107,7 +107,7 @@ public class ListOfSubjectsTest {
         testList.addSubject("Math");
         testList.addSubject("English");
 
-        LinkedHashMap<String, Subject> actualList = testList.getListOfSubjects();
+        LinkedHashMap<String, Subject> actualList = testList.getMapOfSubjects();
         assertEquals(2, actualList.size());
         Iterator<Subject> iter = actualList.values().iterator();
         assertEquals("Math", iter.next().getName());

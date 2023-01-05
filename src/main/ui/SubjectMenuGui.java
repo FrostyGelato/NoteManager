@@ -100,7 +100,7 @@ public class SubjectMenuGui extends MenuGui {
     //EFFECTS: add items to list
     @Override
     protected void loadList() {
-        for (String s: listOfSubjects.getListOfSubjects().keySet()) {
+        for (String s: listOfSubjects.getListOfSubjectNames()) {
             listModel.addElement(s);
         }
     }

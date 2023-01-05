@@ -26,7 +26,7 @@ public class SubjectMenu extends Menu {
 
     //EFFECTS: displays a list of subjects and other options
     void displaySubjectMenu() {
-        LinkedHashMap<String, Subject> subjectList = listOfSubjects.getListOfSubjects();
+        LinkedHashSet<Subject> subjectList = listOfSubjects.getListOfSubjects();
 
         System.out.println("Subject Menu\n");
         System.out.println("Subject List:");
